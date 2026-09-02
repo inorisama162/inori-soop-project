@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>이노리 8월 시청자 어워드</title>
+  <meta name="description" content="방송에서 클릭하며 진행하는 이노리 8월 시청자 어워드">
+  <style>
+    :root{
+      --night:#060a25;--night2:#0a1238;--ink:#f8f9ff;--muted:#aeb7d8;
+      --lav:#c9c7ff;--blue:#718ad7;--gold:#fff6c8;--line:rgba(228,231,255,.22)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--night);color:var(--ink)}
+    body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;overflow:hidden}
+    button,a{-webkit-tap-highlight-color:transparent}
+    button{font:inherit}
+    .app{
+      position:relative;min-height:100svh;overflow:hidden;isolation:isolate;
+      display:grid;grid-template-rows:44px minmax(0,1fr) 56px;gap:10px;padding:10px 18px;
+      background:
+        radial-gradient(circle at 18% 24%,rgba(99,125,202,.36),transparent 30rem),
+        radial-gradient(circle at 82% 72%,rgba(139,131,215,.22),transparent 34rem),
+        linear-gradient(135deg,var(--night2),#080d2a 48%,#05081d)
+    }
+    .app:before{
+      content:"";position:absolute;inset:0;z-index:-2;opacity:.26;
+      background-image:radial-gradient(circle,rgba(255,255,255,.72) 0 1px,transparent 1.5px),radial-gradient(circle,rgba(197,196,255,.68) 0 1px,transparent 1.5px);
+      background-position:0 0,25px 31px;background-size:83px 83px,127px 127px;
+      mask-image:linear-gradient(to bottom,#000,transparent 84%)
+    }
+    .rail{position:relative;z-index:5;width:min(100%,1600px);margin:auto;display:flex;align-items:center}
+    .top{justify-content:space-between;color:rgba(241,243,255,.72)}
+    .brand{display:flex;gap:11px;align-items:center;font:12px Georgia,serif;letter-spacing:.18em}
+    .brand i{width:1px;height:15px;background:rgba(255,255,255,.3)}
+    .hint{margin-left:auto;margin-right:8px;font-size:10px;letter-spacing:.18em;opacity:.52}
+    .icon-btn{
+      width:36px;height:36px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.14);
+      border-radius:7px;color:#fff;background:rgba(255,255,255,.04);cursor:pointer
+    }
+    .icon-btn:hover{background:rgba(255,255,255,.12)}
+    .stage{
+      position:relative;width:min(100%,calc((100svh - 140px)*16/9),1600px);aspect-ratio:16/9;
+      min-height:0;margin:auto;border:1px solid rgba(225,228,255,.18);
+      background:linear-gradient(130deg,rgba(71,92,162,.19),transparent 34%),linear-gradient(315deg,rgba(129,116,200,.12),transparent 38%),rgba(6,10,34,.74);
+      box-shadow:0 2rem 5rem rgba(0,0,0,.33),inset 0 0 4rem rgba(126,145,222,.05)
+    }
+    .corner{position:absolute;z-index:4;width:22px;height:22px;pointer-events:none}
+    .corner:before,.corner:after{content:"";position:absolute;background:rgba(237,239,255,.78)}
+    .corner:before{width:100%;height:1px}.corner:after{width:1px;height:100%}
+    .tl{top:-1px;left:-1px}.tr{top:-1px;right:-1px;transform:rotate(90deg)}
+    .bl{bottom:-1px;left:-1px;transform:rotate(-90deg)}.br{bottom:-1px;right:-1px;transform:rotate(180deg)}
+    #slide{height:100%;overflow:hidden;animation:enter .38s cubic-bezier(.2,.8,.2,1) both}
+    @keyframes enter{from{opacity:0;transform:translateX(15px)}to{opacity:1;transform:none}}
+    .slide{position:relative;height:100%;padding:clamp(22px,3.2vw,58px) clamp(26px,4.3vw,82px)}
+    .slide:after{
+      content:"2026.08 · INORI MONTHLY AWARDS";position:absolute;right:clamp(26px,4.3vw,82px);bottom:20px;
+      color:rgba(231,233,255,.34);font:clamp(8px,.7vw,12px) Georgia,serif;letter-spacing:.17em
+    }
+    .title{display:flex;justify-content:space-between;align-items:flex-start;min-height:94px;padding-bottom:clamp(12px,1.5vw,22px);border-bottom:1px solid var(--line)}
+    .eyebrow,.label{margin:0 0 6px;color:#abb8e8;font:clamp(9px,.75vw,13px) Georgia,serif;letter-spacing:.2em}
+    .title h2{margin:0;font-size:clamp(26px,3.3vw,54px);letter-spacing:-.04em}
+    .reward{min-width:clamp(128px,13vw,215px);padding:11px 14px;border-left:3px solid var(--lav);background:linear-gradient(90deg,rgba(126,139,205,.22),transparent)}
+    .reward small{display:block;color:#aab6e5;font:clamp(8px,.62vw,11px) Georgia,serif;letter-spacing:.18em}
+    .reward strong{display:block;margin-top:4px;font-size:clamp(13px,1.18vw,21px)}
+    .cover{display:grid;place-items:center;text-align:center;overflow:hidden}.cover:after,.closing:after{content:none}
+    .cover-no{position:absolute;left:-2%;bottom:-22%;color:transparent;font:clamp(320px,43vw,690px)/.74 Georgia,serif;-webkit-text-stroke:1px rgba(208,214,255,.1)}
+    .cover-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+    .serif{margin:0;color:#c0c9ee;font:clamp(10px,1vw,16px) Georgia,serif;letter-spacing:.27em}
+    .cover h1{margin:clamp(13px,1.9vw,29px) 0 10px;font-size:clamp(38px,6.3vw,104px);line-height:1;letter-spacing:-.065em;text-shadow:0 0 2.3rem rgba(167,176,239,.34)}
+    .cover-copy>p:not(.serif){margin:0;color:#c8cee9;font-size:clamp(13px,1.25vw,22px)}
+    .rule{width:min(384px,50vw);display:flex;align-items:center;margin:22px 0 0}.rule span{flex:1;height:1px;background:rgba(242,244,255,.65)}
+    .rule i{width:7px;height:7px;transform:rotate(45deg);background:#eef0ff}
+    .start{margin-top:clamp(20px,2.7vw,43px);color:rgba(231,233,255,.65);font-size:clamp(10px,.85vw,14px)}
+    .ticket{
+      position:absolute;right:32px;top:32px;width:clamp(70px,7vw,112px);aspect-ratio:.72;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      border:1px solid rgba(228,231,255,.36);background:rgba(164,169,232,.15);clip-path:polygon(8% 0,92% 0,100% 7%,100% 93%,92% 100%,8% 100%,0 93%,0 7%);transform:rotate(4deg)
+    }
+    .ticket span,.ticket small{font:clamp(7px,.55vw,10px) Georgia,serif;letter-spacing:.16em}.ticket b{font:clamp(26px,3vw,50px) Georgia,serif}
+    .agenda{display:grid;gap:clamp(5px,.7vw,12px);margin-top:clamp(13px,2vw,32px)}
+    .agenda-row{display:grid;grid-template-columns:58px 1.05fr 1fr;align-items:baseline;gap:16px;padding:clamp(7px,.95vw,14px) 11px;border-bottom:1px solid rgba(225,228,255,.14)}
+    .agenda-row span{color:#9dacdf;font:clamp(12px,1vw,16px) Georgia,serif}.agenda-row strong{font-size:clamp(15px,1.65vw,28px)}
+    .agenda-row p{margin:0;color:var(--muted);font-size:clamp(11px,1vw,17px)}
+    .bottom-note{position:absolute;left:clamp(26px,4.3vw,82px);bottom:42px;margin:0;color:#c5cbea;font-size:clamp(10px,.9vw,15px)}
+    .split{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(240px,.9fr);gap:clamp(19px,3vw,56px);margin-top:clamp(14px,2vw,34px)}
+    .rank-list{display:grid;gap:clamp(5px,.7vw,11px);margin:0;padding:0;list-style:none}
+    .rank-list li{display:grid;grid-template-columns:37px minmax(128px,.9fr) minmax(64px,1.3fr) minmax(83px,auto);align-items:center;gap:13px;min-height:clamp(37px,4vw,67px);padding:0 9px;border-bottom:1px solid rgba(226,230,255,.13)}
+    .rank{color:#8595cf;font:clamp(12px,1vw,17px) Georgia,serif}
+    .person{display:flex;flex-direction:column;min-width:0}.person b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(13px,1.25vw,21px)}.person small{color:#7e8aad;font-size:clamp(8px,.66vw,11px)}
+    .bar{height:4px;overflow:hidden;background:rgba(205,211,243,.09)}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--lav));animation:grow .7s .15s ease both;transform-origin:left}
+    @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    .value{font:clamp(12px,1vw,17px) Georgia,serif;text-align:right}.first .rank,.first .value,.first .person b{color:var(--gold)}
+    .comment,.cutoff{position:relative;padding:clamp(16px,2vw,32px);background:linear-gradient(145deg,rgba(139,151,213,.16),transparent 68%),rgba(12,20,55,.56);border-left:1px solid rgba(221,225,255,.28)}
+    .comment:before,.cutoff:before{content:"“";position:absolute;right:16px;top:-12px;color:rgba(204,207,255,.09);font:clamp(96px,10vw,176px)/1 Georgia,serif}
+    .lead{position:relative;margin:13px 0 18px;font-size:clamp(15px,1.55vw,27px);font-weight:700;line-height:1.35}
+    .stat{display:flex;align-items:baseline;gap:12px;margin:clamp(13px,2vw,32px) 0}.stat b{color:var(--lav);font:clamp(32px,4.8vw,80px)/.9 Georgia,serif}.stat span{color:var(--muted);font-size:clamp(10px,.85vw,14px)}
+    .comment ul{display:grid;gap:9px;margin:0;padding:0;color:var(--muted);font-size:clamp(10px,.88vw,15px);list-style:none}.comment li:before{content:"—";margin-right:7px;color:#929fe0}
+    .chat-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(224px,.72fr);gap:clamp(16px,2.3vw,40px);margin-top:clamp(10px,1.4vw,21px)}
+    .rank-list.compact{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}.rank-list.compact li{grid-template-columns:27px minmax(84px,1fr) minmax(32px,.6fr) auto;min-height:clamp(30px,2.9vw,48px);gap:8px;padding:0 5px}
+    .cutoff{display:flex;flex-direction:column}.chart{position:relative;z-index:1;flex:1;min-height:112px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(18px,2.2vw,38px);margin:6px 0 8px;border-bottom:1px solid rgba(225,228,255,.25)}
+    .chart div{height:100%;display:grid;grid-template-rows:18px minmax(0,1fr) 24px;justify-items:center;gap:4px}.chart b{font:clamp(12px,1.05vw,18px) Georgia,serif}.chart i{align-self:end;width:clamp(26px,2.7vw,45px);min-height:7px;background:linear-gradient(to top,#5873c2,var(--lav));animation:rise .65s ease both;transform-origin:bottom}
+    @keyframes rise{from{transform:scaleY(0)}to{transform:scaleY(1)}}.chart span{color:#9da8cc;font-size:clamp(9px,.72vw,12px)}.cutoff .lead{margin:8px 0 3px}.mini{margin:0;color:#99a5cb;font-size:clamp(9px,.77vw,13px)}
+    .winner{height:calc(100% - 112px);display:grid;grid-template-columns:clamp(80px,10vw,160px) 1fr minmax(208px,.55fr);align-items:center;gap:clamp(19px,3vw,56px)}
+    .winner-no{align-self:stretch;display:grid;place-items:center;color:transparent;font:clamp(80px,11vw,176px) Georgia,serif;-webkit-text-stroke:1px rgba(210,215,255,.24);writing-mode:vertical-rl}
+    .winner-copy>p{margin:0 0 6px;color:#9dacdf;font:clamp(10px,.9vw,15px) Georgia,serif;letter-spacing:.22em}.winner-copy h3{margin:0 0 clamp(13px,1.8vw,29px);font-size:clamp(36px,5.8vw,96px);line-height:1;letter-spacing:-.055em}
+    .link{display:inline-flex;align-items:center;gap:8px;color:#dfe2ff;text-decoration:none;border-bottom:1px solid rgba(223,226,255,.38)}.link:hover{color:#fff;border-color:#fff}.feature{font-size:clamp(14px,1.4vw,23px);font-weight:700}
+    .quotes{display:grid;gap:5px;margin-top:clamp(18px,2.4vw,40px);padding-left:16px;border-left:2px solid #8ea1e2}.quotes span{color:#aab3d4;font-size:clamp(10px,.88vw,15px)}.quotes b{font-size:clamp(13px,1.15vw,19px)}
+    .prize{position:relative;display:flex;min-height:clamp(160px,19vw,320px);flex-direction:column;justify-content:center;padding:clamp(18px,2.4vw,38px);overflow:hidden;background:linear-gradient(145deg,rgba(238,239,255,.16),rgba(138,145,212,.08));border:1px solid rgba(230,232,255,.3);clip-path:polygon(5% 0,95% 0,100% 6%,100% 94%,95% 100%,5% 100%,0 94%,0 6%)}
+    .prize:before{content:"P";position:absolute;right:13px;bottom:-32px;color:rgba(236,237,255,.07);font:clamp(112px,13vw,208px) Georgia,serif}.prize small{color:#9eabdb;font:clamp(8px,.65vw,11px) Georgia,serif;letter-spacing:.18em}.prize b{position:relative;margin:11px 0;font-size:clamp(18px,2.1vw,36px);line-height:1.25}.prize span{position:relative;color:var(--muted);font-size:clamp(9px,.77vw,13px)}
+    .podium{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:clamp(11px,1.6vw,26px);margin-top:clamp(13px,1.8vw,27px)}
+    .podium article{position:relative;min-height:clamp(130px,16vw,256px);display:flex;flex-direction:column;justify-content:center;padding:clamp(14px,1.8vw,29px);overflow:hidden;border-top:1px solid rgba(225,228,255,.3);background:linear-gradient(145deg,rgba(102,120,189,.16),rgba(13,20,54,.16))}
+    .podium article:first-child{background:linear-gradient(145deg,rgba(172,178,232,.24),rgba(35,43,88,.22));border-top-color:var(--gold)}.podium .num{position:absolute;right:12px;top:-8px;color:rgba(214,218,255,.08);font:clamp(72px,9vw,144px)/1 Georgia,serif}
+    .podium p{position:relative;margin:0;font-size:clamp(14px,1.35vw,22px);font-weight:700}.podium strong{position:relative;margin:3px 0 9px;color:var(--lav);font:clamp(34px,4.6vw,77px)/1 Georgia,serif}.podium article:first-child strong{color:var(--gold)}.podium strong small{margin-left:3px;font:700 .28em sans-serif}.podium em{position:relative;min-height:2.4em;color:#9fa9cd;font-size:clamp(9px,.75vw,13px);font-style:normal;line-height:1.45}
+    .honorable{display:grid;grid-template-columns:auto auto auto auto 1fr auto;align-items:center;gap:11px;margin-top:clamp(10px,1.2vw,19px);padding:clamp(8px,.9vw,14px) 16px;border:1px solid rgba(221,225,255,.18);color:#c9ceeb;font-size:clamp(9px,.72vw,12px)}.honorable b{color:#fff;font-size:clamp(12px,.95vw,16px)}.honorable em{color:var(--gold);font-style:normal}
+    .highlights{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,32px);margin-top:clamp(16px,2.2vw,35px)}
+    .highlight{position:relative;min-height:clamp(208px,26vw,416px);display:grid;grid-template-columns:clamp(51px,6vw,96px) 1fr auto;align-items:center;gap:clamp(11px,1.4vw,22px);padding:clamp(16px,2.2vw,37px);overflow:hidden;color:inherit;text-decoration:none;border:1px solid rgba(226,229,255,.2);background:linear-gradient(145deg,rgba(102,121,197,.21),transparent 60%),rgba(13,20,55,.42);transition:.18s}.highlight:hover{transform:translateY(-5px);border-color:rgba(232,234,255,.56)}
+    .highlight .hno{color:transparent;font:clamp(45px,5vw,80px) Georgia,serif;-webkit-text-stroke:1px rgba(211,216,255,.28)}.highlight p{margin:0 0 7px;color:#99a8de;font:clamp(9px,.72vw,12px) Georgia,serif;letter-spacing:.14em}.highlight h3{margin:0 0 16px;font-size:clamp(23px,2.9vw,48px);letter-spacing:-.04em}.highlight strong{display:block;max-width:27rem;font-size:clamp(11px,1.05vw,18px);line-height:1.4}.highlight small{display:block;margin-top:10px;color:#909cc5;font-size:clamp(9px,.72vw,12px)}
+    .whisper{position:absolute;left:clamp(26px,4.3vw,82px);bottom:41px;color:rgba(217,220,246,.55);font-size:clamp(8px,.7vw,12px)}
+    .arts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(9px,1.3vw,20px);margin-top:clamp(13px,1.6vw,24px)}
+    .art{position:relative;min-height:clamp(96px,11.5vw,184px);display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:10px;padding:clamp(11px,1.45vw,22px);overflow:hidden;color:inherit;text-decoration:none;border-left:2px solid rgba(161,175,228,.7);background:linear-gradient(90deg,rgba(99,119,192,.15),rgba(15,23,60,.2));transition:.18s}.art:hover{transform:translateX(4px);background:linear-gradient(90deg,rgba(126,144,211,.24),rgba(15,23,60,.22))}
+    .art>span{align-self:start;color:#7e8fc9;font:clamp(10px,.82vw,14px) Georgia,serif}.art p{margin:0 0 3px;color:#aab6df;font-size:clamp(9px,.76vw,13px)}.art strong{display:block;font-size:clamp(13px,1.28vw,21px)}.art small{display:block;margin-top:6px;color:#8d99c0;font-size:clamp(8px,.65vw,11px);line-height:1.35}.bonus{border-left-color:var(--lav);background:linear-gradient(90deg,rgba(154,148,220,.2),rgba(15,23,60,.2))}
+    .closing{display:grid;grid-template-columns:1fr minmax(192px,.42fr);align-items:center;gap:48px}.closing h2{margin:9px 0 0;font-size:clamp(45px,6.4vw,109px);letter-spacing:-.065em;line-height:1}.closing .copy>p:not(.serif){margin:clamp(13px,1.7vw,26px) 0 0;color:#bec5e4;font-size:clamp(14px,1.25vw,21px);line-height:1.6}
+    .receipt{width:min(100%,624px);display:grid;gap:5px;margin-top:clamp(16px,2vw,32px);padding:clamp(13px,1.3vw,21px);border-left:3px solid var(--lav);background:linear-gradient(90deg,rgba(123,139,205,.18),transparent)}.receipt b{font-size:clamp(12px,1vw,17px)}.receipt span{color:var(--muted);font-size:clamp(9px,.78vw,13px)}
+    .guide{margin-top:16px;font-size:clamp(10px,.8vw,14px)}.mono{position:relative;aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(223,226,255,.28);border-radius:50%;box-shadow:0 0 0 1rem rgba(171,176,232,.04),0 0 0 2rem rgba(171,176,232,.025),inset 0 0 3rem rgba(152,163,224,.12)}.mono:before,.mono:after{content:"";position:absolute;inset:13%;border:1px solid rgba(223,226,255,.15);transform:rotate(45deg)}.mono:after{inset:28%}.mono span{font:clamp(80px,12vw,192px)/1 Georgia,serif;text-shadow:0 0 2rem rgba(196,199,255,.35)}.mono small{position:absolute;bottom:13%;font:clamp(8px,.72vw,12px) Georgia,serif;letter-spacing:.22em}
+    .controls{gap:14px}.progress{flex:1;min-width:0}.meta{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}.meta span{color:var(--muted);font-size:11px}.meta b{font:13px Georgia,serif}.meta i{margin:0 5px;color:#6f7ba5;font-style:normal}.track{height:1px;overflow:hidden;background:rgba(225,228,255,.16)}.track i{display:block;height:100%;background:#dedfff;transition:width .25s}
+    @media(max-aspect-ratio:6/5),(max-width:760px){
+      body{overflow:auto}.app{min-height:100svh;overflow:auto;grid-template-rows:42px auto 58px;padding:7px}
+      .hint{display:none}.stage{width:100%;min-height:calc(100svh - 121px);aspect-ratio:auto}.slide{min-height:calc(100svh - 121px);height:auto;padding:23px 17px 56px}#slide{height:auto;min-height:calc(100svh - 121px);overflow:visible}
+      .title{min-height:80px}.reward{min-width:122px}.agenda-row{grid-template-columns:36px 1fr}.agenda-row p{display:none}
+      .split,.chat-grid,.winner,.closing{grid-template-columns:1fr}.comment,.cutoff{min-height:192px}.rank-list.compact{grid-template-columns:1fr}
+      .winner{height:auto;align-content:start;padding-top:16px}.winner-no{display:none}.prize{min-height:144px}
+      .podium,.highlights,.arts{grid-template-columns:1fr}.podium article,.highlight,.art{min-height:112px}
+      .honorable{grid-template-columns:auto auto 1fr auto}.honorable span{grid-column:1/-1}.bottom-note,.whisper{position:static;margin-top:16px}.mono{display:none}
+    }
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <main class="app" id="app">
+    <nav class="rail top" aria-label="발표 진행">
+      <div class="brand"><span>INORI</span><i></i><b>MONTHLY AWARDS</b></div>
+      <div class="hint">CLICK · ← → · SPACE</div>
+      <button class="icon-btn" id="full" title="전체화면 (F)" aria-label="전체화면">⛶</button>
+    </nav>
+    <div class="stage">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <article id="slide" aria-live="polite"></article>
+    </div>
+    <footer class="rail controls">
+      <button class="icon-btn" id="prev" aria-label="이전 슬라이드">←</button>
+      <div class="progress">
+        <div class="meta"><span id="label"></span><b><span id="current">01</span><i>/</i><span id="total">10</span></b></div>
+        <div class="track"><i id="bar"></i></div>
+      </div>
+      <button class="icon-btn" id="next" aria-label="다음 슬라이드">→</button>
+    </footer>
+  </main>
+  <script>
+    const labels=["표지","오늘의 시상식","참여시간상","채팅 별별상","팬영상 편집상","클립왕","이달의 클립","팬아터 ①","팬아터 ②","마무리"];
+    const title=(eye,name,reward="")=>`<header class="title"><div><p class="eyebrow">${eye}</p><h2>${name}</h2></div>${reward?`<div class="reward"><small>REWARD</small><strong>${reward}</strong></div>`:""}</header>`;
+    const rule='<div class="rule"><i></i><span></span><i></i></div>';
+    const rankList=(items,compact=false)=>{
+      const max=Math.max(...items.map(x=>x.score));
+      return `<ol class="rank-list ${compact?"compact":""}">${items.map(x=>`<li class="${x.rank===1?"first":""}"><span class="rank">${String(x.rank).padStart(2,"0")}</span><span class="person"><b>${x.name}</b></span><span class="bar"><i style="width:${Math.max(16,x.score/max*100)}%"></i></span><b class="value">${x.value}</b></li>`).join("")}</ol>`;
+    };
+    const participation=[
+      {rank:1,name:"룬ing",value:"292:15:20",score:292},
+      {rank:2,name:"홍명보사랑단",value:"164:35:40",score:164},
+      {rank:3,name:"몽이!!",value:"151:44:33",score:151},
+      {rank:4,name:"세구띠",value:"124:22:45",score:124},
+      {rank:5,name:"드지",value:"113:08:56",score:113}
+    ];
+    const chats=[
+      {rank:1,name:"몽이!!",value:"5,372",score:5372},{rank:2,name:"드지",value:"4,461",score:4461},
+      {rank:3,name:"자팽박3",value:"4,012",score:4012},{rank:4,name:"캐릉",value:"3,744",score:3744},
+      {rank:5,name:"고기는웬딘",value:"3,443",score:3443},{rank:6,name:"냉동개구리_",value:"2,802",score:2802},
+      {rank:7,name:"달구리!",value:"2,572",score:2572},{rank:8,name:"세구띠",value:"2,179",score:2179},
+      {rank:9,name:"코미좋아",value:"2,018",score:2018},{rank:10,name:"홍명보사랑단",value:"1,959",score:1959}
+    ];
+    const arts=[
+      ["망둥","츄즈미","https://cafe.naver.com/f-e/cafes/31568287/articles/17377?boardtype=I&menuid=10&referrerAllArticles=false",""],
+      ["이령","먼작지","https://cafe.naver.com/f-e/cafes/31568287/articles/17776?boardtype=I&menuid=10&referrerAllArticles=false",""],
+      ["이령","뫙키마쿠라","https://cafe.naver.com/f-e/cafes/31568287/articles/17310?boardtype=I&menuid=10&referrerAllArticles=false",""],
+      ["이몽","유령노리","https://cafe.naver.com/f-e/cafes/31568287/articles/17190?boardtype=I&menuid=10&referrerAllArticles=false&page=2",""],
+      ["이령","리듬지하","https://cafe.naver.com/f-e/cafes/31568287/articles/17092?boardtype=I&menuid=10&referrerAllArticles=false&page=2",""],
+      ["이령","리듬지옥","https://cafe.naver.com/f-e/cafes/31568287/articles/16147?boardtype=I&menuid=10&referrerAllArticles=false&page=3",""],
+      ["연토라군","뿡기노기","https://cafe.naver.com/f-e/cafes/31568287/articles/16991?boardtype=I&menuid=10&referrerAllArticles=false&page=2",""],
+      ["이령","마헤라","https://cafe.naver.com/f-e/cafes/31568287/articles/16894?boardtype=I&menuid=10&referrerAllArticles=false&page=2",""],
+      ["이령","지하돌 헤어체인지","https://cafe.naver.com/f-e/cafes/31568287/articles/16951?boardtype=I&menuid=10&referrerAllArticles=false&page=2",""],
+      ["이령","지하해적단","https://cafe.naver.com/f-e/cafes/31568287/articles/16554?boardtype=I&menuid=10&referrerAllArticles=false&page=2","방송에서 놓친 것 같아서 다시 볼게!"],
+      ["이령","바니걸 이노리","https://cafe.naver.com/f-e/cafes/31568287/articles/16306?boardtype=I&menuid=10&referrerAllArticles=false&page=2",""],
+      ["하나둘3","비키니 노리","https://cafe.naver.com/f-e/cafes/31568287/articles/17562?boardtype=I&menuid=10&referrerAllArticles=false&page=1","원본도 잘 받았습니다!"]
+    ];
+    const artCards=(start,end)=>arts.slice(start,end).map((x,i)=>`<a class="art" target="_blank" rel="noreferrer" href="${x[2]}"><span>${String(start+i+1).padStart(2,"0")}</span><div><p>${x[0]} 님</p><strong>${x[1]}</strong>${x[3]?`<small>${x[3]}</small>`:""}</div><b>↗</b></a>`).join("");
+    const slides=[
+      `<section class="slide cover"><div class="cover-no">08</div><div class="cover-copy"><p class="serif">INORI POINT REGULATION</p>${rule}<h1>8월 시청자 어워드</h1><p>채팅부터 팬아트까지, 이번 달의 서번튜들 총결산</p><div class="start">▶ 화면을 클릭해서 시작</div></div><div class="ticket"><span>INORI</span><b>P</b><small>2026.08</small></div></section>`,
+      `<section class="slide">${title("AUGUST LINE-UP","오늘의 시상식")}<div class="agenda">${[["01","별별 참여시간상","오래 함께해 준 서번튜"],["02","채팅 별별상","방송을 꽉 채운 채팅"],["03","팬영상 편집상","유튜브 재가동의 계기"],["04","클립왕","숏츠각 수확 장인"],["05","이달의 팬아터","8월의 작품 모아보기"]].map(x=>`<div class="agenda-row"><span>${x[0]}</span><strong>${x[1]}</strong><p>${x[2]}</p></div>`).join("")}</div><p class="bottom-note">포인트 보상까지 한 번에 정산합니다!</p></section>`,
+      `<section class="slide">${title("AWARD 01 · WATCH TIME","별별 참여시간상","TOP 5 · +1PT")}<div class="split">${rankList(participation)}<aside class="comment"><span class="label">노리 코멘트</span><p class="lead">이번 달은 컷이 되게 촘촘했습니다</p><div class="stat"><b>2–4H</b><span>10위권 시간 차이</span></div><ul><li>방송시간이 적어서 더 박빙이었던 듯…</li><li>10위 안에 못 들었다고 자책 노노!</li></ul></aside></div></section>`,
+      `<section class="slide">${title("AWARD 02 · CHAT","채팅 별별상","TOP 10 · +2PT")}<div class="chat-grid">${rankList(chats,true)}<aside class="cutoff"><p class="label">100위 컷 채팅 수</p><div class="chart"><div><b>9</b><i style="height:56%"></i><span>6월</span></div><div><b>7</b><i style="height:44%"></i><span>7월</span></div><div><b>16</b><i style="height:100%"></i><span>8월</span></div></div><p class="lead">아침뱅도 해보고, 다시 16회!</p><p class="mini">이번 달은 더 많은 분들이랑 만난 것 같아서 좋았습니다</p></aside></div></section>`,
+      `<section class="slide">${title("AWARD 03 · FAN VIDEO","이달의 팬영상 편집자")}<div class="winner"><div class="winner-no">01</div><div class="winner-copy"><p>WINNER</p><h3>저기요옷 님</h3><a class="link feature" target="_blank" rel="noreferrer" href="https://www.youtube.com/shorts/O90EzattPTw">최신 유행이라는 ‘너 가난하게 컸어?’ 챌린지 ↗</a><div class="quotes"><span>숏츠 재가동 타이밍에 딱 올라온 영상</span><b>어떻게 보면 유튜브 다시 켜게 된 계기!</b></div></div><div class="prize"><small>SPECIAL REWARD</small><b>구독권 + 퀵뷰 3장</b><span>카페 댓글로 수령 안내드릴게요</span></div></div></section>`,
+      `<section class="slide">${title("AWARD 04 · CLIP MAKER","8월 클립왕")}<div class="podium"><article><span class="num">01</span><p>몽이!!</p><strong>83<small>개</small></strong><em>‘이노리’ 들어간 제목만 50개 이상… 그래서 맞는 듯</em></article><article><span class="num">02</span><p>김페슈</p><strong>27<small>개</small></strong><em>숏츠각 엄청 뽑아줌 · 편집 들어간 것만 3개</em></article><article><span class="num">03</span><p>쩌기요옷</p><strong>23<small>개</small></strong><em>꾸준한 클립 수확 감사!</em></article></div><div class="honorable"><span>✦ 번외</span><b>아마추어3부</b><b>12개 예상</b><span>노래 클립을 많이 따줌… 노래 더 잘할게</span><em>퀵뷰 1장</em></div><p class="bottom-note">클립·캐치를 따주면 그 부분만 바로 다운 가능! 유튜브 하이라이트랑 숏츠각에 댕좋습니다</p></section>`,
+      `<section class="slide">${title("AUGUST HIGHLIGHTS","이달의 유저 클립 & 캐치","각 +1PT")}<div class="highlights"><a class="highlight" target="_blank" rel="noreferrer" href="https://vod.sooplive.com/player/204550949"><span class="hno">01</span><div><p>이달의 유저클립</p><h3>몽이!! 님</h3><strong>세구님이 사주셨던 플스5 당근한 이노리</strong><small>조회수 약 161회</small></div><b>↗</b></a><a class="highlight" target="_blank" rel="noreferrer" href="https://vod.sooplive.com/player/204572607/catch"><span class="hno">02</span><div><p>이달의 유저캐치</p><h3>몽환소녀Star 님</h3><strong>마왕이노리) 고세구가 사준 플스5 당근했다</strong><small>조회수 약 4,050회</small></div><b>↗</b></a></div><div class="whisper">여담 · 고이봤 안 올라간 것 같아서 살았습니다</div></section>`,
+      `<section class="slide">${title("AWARD 05 · FAN ART · 01","이달의 팬아터","작가별 +1PT")}<div class="arts">${artCards(0,6)}</div></section>`,
+      `<section class="slide">${title("AWARD 05 · FAN ART · 02","이달의 팬아터","작가별 +1PT")}<div class="arts">${artCards(6,12)}<article class="art bonus"><span>+</span><div><p>고냥곤약 님</p><strong>스포 방지로 아직 못 본 비밀작</strong><small>눈 감고 뒤로가기 성공. 스포는 진짜 하나도 안 봤습니다</small></div><b>✦</b></article></div></section>`,
+      `<section class="slide closing"><div class="copy"><p class="serif">THANK YOU, SERVANTS</p><h2>8월도 고맙습니다</h2>${rule}<p>채팅도, 클립도, 팬아트도<br>전부 방송을 이어가는 힘이 됐습니다</p><div class="receipt"><b>포인트 수령 안내</b><span>카페 댓글에 이모티콘 또는 SOOP 닉네임 남기기</span><span>9월 안으로 회신 · 수령은 편하게 선택!</span></div><a class="link guide" target="_blank" rel="noreferrer" href="https://www.sooplive.com/station/inorisama/post/203168661">포인트 제도 원문 보기 ↗</a></div><div class="mono"><span>P</span><small>INORI</small></div></section>`
+    ];
+    let index=0,touchX=null;
+    const slide=document.getElementById("slide"),label=document.getElementById("label"),current=document.getElementById("current"),bar=document.getElementById("bar");
+    document.getElementById("total").textContent=String(slides.length).padStart(2,"0");
+    const render=()=>{slide.style.animation="none";void slide.offsetWidth;slide.style.animation="";slide.innerHTML=slides[index];label.textContent=labels[index];current.textContent=String(index+1).padStart(2,"0");bar.style.width=((index+1)/slides.length*100)+"%";document.getElementById("prev").disabled=index===0;document.getElementById("next").disabled=index===slides.length-1};
+    const go=n=>{index=Math.max(0,Math.min(n,slides.length-1));render()},next=()=>go(index+1),prev=()=>go(index-1);
+    document.getElementById("next").onclick=next;document.getElementById("prev").onclick=prev;
+    document.getElementById("full").onclick=()=>document.documentElement.requestFullscreen?.();
+    document.getElementById("app").addEventListener("click",e=>{if(e.target.closest("a,button"))return;e.clientX/window.innerWidth<.24?prev():next()});
+    addEventListener("keydown",e=>{if(["ArrowRight"," ","Enter","PageDown"].includes(e.key)){e.preventDefault();next()}if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){e.preventDefault();prev()}if(e.key==="Home")go(0);if(e.key==="End")go(slides.length-1);if(e.key.toLowerCase()==="f")document.documentElement.requestFullscreen?.()});
+    addEventListener("touchstart",e=>touchX=e.touches[0]?.clientX,{passive:true});addEventListener("touchend",e=>{if(touchX===null)return;const d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>50)d<0?next():prev();touchX=null},{passive:true});
+    render();
+  </script>
+</body>
+</html>
