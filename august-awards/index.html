@@ -27,8 +27,11 @@
       content:"";position:absolute;inset:0;z-index:-2;opacity:.26;
       background-image:radial-gradient(circle,rgba(255,255,255,.72) 0 1px,transparent 1.5px),radial-gradient(circle,rgba(197,196,255,.68) 0 1px,transparent 1.5px);
       background-position:0 0,25px 31px;background-size:83px 83px,127px 127px;
-      mask-image:linear-gradient(to bottom,#000,transparent 84%)
+      mask-image:linear-gradient(to bottom,#000,transparent 84%);animation:starDrift 24s linear infinite
     }
+    .app:after{content:"";position:absolute;z-index:-1;inset:-25%;pointer-events:none;background:radial-gradient(circle at 32% 30%,rgba(144,154,242,.18),transparent 25%),radial-gradient(circle at 70% 68%,rgba(111,132,219,.16),transparent 28%);filter:blur(28px);animation:auroraFloat 11s ease-in-out infinite alternate}
+    @keyframes starDrift{to{background-position:83px 83px,152px 158px}}
+    @keyframes auroraFloat{0%{transform:translate3d(-2%,-1%,0) scale(1)}100%{transform:translate3d(3%,2%,0) scale(1.08)}}
     .rail{position:relative;z-index:5;width:min(100%,1600px);margin:auto;display:flex;align-items:center}
     .top{justify-content:space-between;color:rgba(241,243,255,.72)}
     .brand{display:flex;gap:11px;align-items:center;font:12px Georgia,serif;letter-spacing:.18em}
@@ -40,42 +43,50 @@
     }
     .icon-btn:hover{background:rgba(255,255,255,.12)}
     .stage{
-      position:relative;width:min(100%,calc((100svh - 140px)*16/9),1600px);aspect-ratio:16/9;
+      position:relative;width:min(100%,calc((100svh - 140px)*16/9),1600px);aspect-ratio:16/9;overflow:hidden;
       min-height:0;margin:auto;border:1px solid rgba(225,228,255,.18);
       background:linear-gradient(130deg,rgba(71,92,162,.19),transparent 34%),linear-gradient(315deg,rgba(129,116,200,.12),transparent 38%),rgba(6,10,34,.74);
       box-shadow:0 2rem 5rem rgba(0,0,0,.33),inset 0 0 4rem rgba(126,145,222,.05)
     }
+    .stage:before{content:"";position:absolute;z-index:3;top:-40%;bottom:-40%;left:-38%;width:24%;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(224,228,255,.1),rgba(255,255,255,.18),rgba(199,204,255,.08),transparent);filter:blur(7px);transform:skewX(-14deg);animation:lightSweep 6.8s ease-in-out infinite}
+    @keyframes lightSweep{0%,20%{left:-38%;opacity:0}32%{opacity:1}56%{left:118%;opacity:.9}62%,100%{left:118%;opacity:0}}
     .corner{position:absolute;z-index:4;width:22px;height:22px;pointer-events:none}
     .corner:before,.corner:after{content:"";position:absolute;background:rgba(237,239,255,.78)}
     .corner:before{width:100%;height:1px}.corner:after{width:1px;height:100%}
     .tl{top:-1px;left:-1px}.tr{top:-1px;right:-1px;transform:rotate(90deg)}
     .bl{bottom:-1px;left:-1px;transform:rotate(-90deg)}.br{bottom:-1px;right:-1px;transform:rotate(180deg)}
-    #slide{height:100%;overflow:hidden;animation:enter .38s cubic-bezier(.2,.8,.2,1) both}
-    @keyframes enter{from{opacity:0;transform:translateX(15px)}to{opacity:1;transform:none}}
-    .slide{position:relative;height:100%;padding:clamp(22px,3.2vw,58px) clamp(26px,4.3vw,82px)}
+    #slide{height:100%;overflow:hidden;animation:enter .58s cubic-bezier(.16,.82,.25,1) both}
+    @keyframes enter{from{opacity:0;transform:translate3d(34px,0,0) scale(.985);filter:blur(7px)}60%{filter:blur(0)}to{opacity:1;transform:none;filter:none}}
+    .slide{position:relative;isolation:isolate;height:100%;padding:clamp(22px,3.2vw,58px) clamp(26px,4.3vw,82px)}
+    .slide:before{content:"";position:absolute;z-index:-1;width:42%;aspect-ratio:1;right:-13%;top:-28%;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(188,190,255,.13),rgba(99,119,200,.04) 40%,transparent 70%);animation:orbPulse 5.4s ease-in-out infinite alternate}
+    @keyframes orbPulse{from{transform:scale(.86);opacity:.48}to{transform:scale(1.16);opacity:1}}
     .slide:after{
       content:"2026.08 · INORI MONTHLY AWARDS";position:absolute;right:clamp(26px,4.3vw,82px);bottom:20px;
       color:rgba(231,233,255,.34);font:clamp(8px,.7vw,12px) Georgia,serif;letter-spacing:.17em
     }
-    .title{display:flex;justify-content:space-between;align-items:flex-start;min-height:94px;padding-bottom:clamp(12px,1.5vw,22px);border-bottom:1px solid var(--line)}
+    .title{display:flex;justify-content:space-between;align-items:flex-start;min-height:94px;padding-bottom:clamp(12px,1.5vw,22px);border-bottom:1px solid var(--line);animation:headingIn .62s .08s cubic-bezier(.16,.82,.25,1) backwards}
+    @keyframes headingIn{from{opacity:0;transform:translateY(-20px);clip-path:inset(0 0 100% 0)}to{opacity:1;transform:none;clip-path:inset(0)}}
     .eyebrow,.label{margin:0 0 6px;color:#abb8e8;font:clamp(9px,.75vw,13px) Georgia,serif;letter-spacing:.2em}
     .title h2{margin:0;font-size:clamp(26px,3.3vw,54px);letter-spacing:-.04em}
-    .reward{min-width:clamp(128px,13vw,215px);padding:11px 14px;border-left:3px solid var(--lav);background:linear-gradient(90deg,rgba(126,139,205,.22),transparent)}
+    .reward{min-width:clamp(128px,13vw,215px);padding:11px 14px;border-left:3px solid var(--lav);background:linear-gradient(90deg,rgba(126,139,205,.22),transparent);animation:rewardGlow 2.8s 1s ease-in-out infinite alternate}
+    @keyframes rewardGlow{from{box-shadow:0 0 0 rgba(183,187,255,0);border-left-color:#aeb6ed}to{box-shadow:-10px 0 28px rgba(169,173,246,.18);border-left-color:#f0efff}}
     .reward small{display:block;color:#aab6e5;font:clamp(8px,.62vw,11px) Georgia,serif;letter-spacing:.18em}
     .reward strong{display:block;margin-top:4px;font-size:clamp(13px,1.18vw,21px)}
     .cover{display:grid;place-items:center;text-align:center;overflow:hidden}.cover:after,.closing:after{content:none}
     .cover-no{position:absolute;left:-2%;bottom:-22%;color:transparent;font:clamp(320px,43vw,690px)/.74 Georgia,serif;-webkit-text-stroke:1px rgba(208,214,255,.1)}
     .cover-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
     .serif{margin:0;color:#c0c9ee;font:clamp(10px,1vw,16px) Georgia,serif;letter-spacing:.27em}
-    .cover h1{margin:clamp(13px,1.9vw,29px) 0 10px;font-size:clamp(38px,6.3vw,104px);line-height:1;letter-spacing:-.065em;text-shadow:0 0 2.3rem rgba(167,176,239,.34)}
+    .cover h1{margin:clamp(13px,1.9vw,29px) 0 10px;font-size:clamp(38px,6.3vw,104px);line-height:1;letter-spacing:-.065em;color:transparent;background:linear-gradient(105deg,#fff 10%,#cdd2ff 34%,#fff 52%,#aebbe9 74%,#fff 92%);background-size:230% auto;-webkit-background-clip:text;background-clip:text;text-shadow:0 0 2.3rem rgba(167,176,239,.25);animation:titleShimmer 4s ease-in-out infinite}
+    @keyframes titleShimmer{0%,18%{background-position:120% center}65%,100%{background-position:-110% center}}
     .cover-copy>p:not(.serif){margin:0;color:#c8cee9;font-size:clamp(13px,1.25vw,22px)}
     .rule{width:min(384px,50vw);display:flex;align-items:center;margin:22px 0 0}.rule span{flex:1;height:1px;background:rgba(242,244,255,.65)}
     .rule i{width:7px;height:7px;transform:rotate(45deg);background:#eef0ff}
     .start{margin-top:clamp(20px,2.7vw,43px);color:rgba(231,233,255,.65);font-size:clamp(10px,.85vw,14px)}
     .ticket{
       position:absolute;right:32px;top:32px;width:clamp(70px,7vw,112px);aspect-ratio:.72;display:flex;flex-direction:column;align-items:center;justify-content:center;
-      border:1px solid rgba(228,231,255,.36);background:rgba(164,169,232,.15);clip-path:polygon(8% 0,92% 0,100% 7%,100% 93%,92% 100%,8% 100%,0 93%,0 7%);transform:rotate(4deg)
+      border:1px solid rgba(228,231,255,.36);background:rgba(164,169,232,.15);clip-path:polygon(8% 0,92% 0,100% 7%,100% 93%,92% 100%,8% 100%,0 93%,0 7%);transform:rotate(4deg);animation:ticketFloat 3.6s ease-in-out infinite alternate
     }
+    @keyframes ticketFloat{from{transform:translateY(-4px) rotate(3deg)}to{transform:translateY(8px) rotate(6deg)}}
     .ticket span,.ticket small{font:clamp(7px,.55vw,10px) Georgia,serif;letter-spacing:.16em}.ticket b{font:clamp(26px,3vw,50px) Georgia,serif}
     .agenda{display:grid;gap:clamp(5px,.7vw,12px);margin-top:clamp(13px,2vw,32px)}
     .agenda-row{display:grid;grid-template-columns:58px 1.05fr 1fr;align-items:baseline;gap:16px;padding:clamp(7px,.95vw,14px) 11px;border-bottom:1px solid rgba(225,228,255,.14)}
@@ -126,21 +137,34 @@
     .exchange{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(17px,2.2vw,36px);margin-top:clamp(17px,2.2vw,35px)}
     .settlement,.schedule{display:grid;gap:clamp(10px,1.1vw,18px)}
     .status,.date-card{display:grid;grid-template-columns:clamp(58px,5.6vw,90px) 1fr;align-items:center;gap:clamp(12px,1.3vw,21px);min-height:clamp(72px,8.1vw,130px);padding:clamp(13px,1.5vw,24px);border-left:3px solid #8097e0;background:linear-gradient(90deg,rgba(96,119,197,.22),rgba(11,19,54,.28))}
-    .status.pending{border-left-color:var(--lav)}.status small,.date-card small{color:#9eacdc;font:clamp(10px,.8vw,14px) Georgia,serif;letter-spacing:.08em}.status strong,.date-card strong{font-size:clamp(16px,1.55vw,26px)}.status span{grid-column:2;color:var(--muted);font-size:clamp(9px,.76vw,13px)}
+    .status.pending{border-left-color:var(--lav)}.status small,.date-card small{color:#9eacdc;font:clamp(10px,.8vw,14px) Georgia,serif;letter-spacing:.08em}.status strong{font-size:clamp(14px,1.2vw,21px);line-height:1.35}.date-card strong{font-size:clamp(16px,1.55vw,26px)}.status span{grid-column:2;color:var(--muted);font-size:clamp(9px,.76vw,13px);line-height:1.45}
     .date-card{grid-template-columns:clamp(70px,7vw,112px) 1fr;border-left-width:1px}.date-card strong{font-family:Georgia,serif;letter-spacing:.04em}
-    .form-btn{min-height:clamp(62px,6.5vw,104px);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,2vw,32px);color:#09102f;text-decoration:none;background:linear-gradient(100deg,#ebeaff,#c5ccff);font-size:clamp(15px,1.45vw,24px);font-weight:800;transition:.18s}.form-btn:hover{transform:translateY(-3px);box-shadow:0 13px 34px rgba(122,140,213,.24)}.form-btn b{font:clamp(24px,2.4vw,38px) Georgia,serif}
+    .form-btn{position:relative;overflow:hidden;min-height:clamp(62px,6.5vw,104px);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,2vw,32px);color:#09102f;text-decoration:none;background:linear-gradient(100deg,#ebeaff,#c5ccff);font-size:clamp(15px,1.45vw,24px);font-weight:800;transition:.18s}.form-btn:after{content:"";position:absolute;inset:-60% auto -60% -35%;width:22%;background:rgba(255,255,255,.62);filter:blur(7px);transform:skewX(-18deg);animation:buttonShine 3.6s 1.4s ease-in-out infinite}.form-btn span,.form-btn b{position:relative;z-index:1}.form-btn:hover{transform:translateY(-3px);box-shadow:0 13px 34px rgba(122,140,213,.24)}.form-btn b{font:clamp(24px,2.4vw,38px) Georgia,serif}
+    @keyframes buttonShine{0%,30%{left:-35%;opacity:0}42%{opacity:1}68%{left:120%;opacity:.85}72%,100%{left:120%;opacity:0}}
     .exchange-note{margin-top:clamp(13px,1.6vw,25px);padding:clamp(11px,1.1vw,17px) clamp(14px,1.5vw,24px);color:#c9cfea;background:rgba(255,255,255,.045);font-size:clamp(10px,.88vw,15px);text-align:center}
+    .agenda-row,.rank-list li,.podium article,.highlight,.art,.status,.date-card{animation:cardRise .56s cubic-bezier(.17,.82,.28,1) backwards}
+    .agenda-row:nth-child(2),.rank-list li:nth-child(2),.podium article:nth-child(2),.highlight:nth-child(2),.art:nth-child(2),.status:nth-child(2),.date-card:nth-child(2){animation-delay:.1s}
+    .agenda-row:nth-child(3),.rank-list li:nth-child(3),.podium article:nth-child(3),.art:nth-child(3){animation-delay:.16s}
+    .agenda-row:nth-child(4),.rank-list li:nth-child(4),.art:nth-child(4){animation-delay:.22s}
+    .agenda-row:nth-child(5),.rank-list li:nth-child(5),.art:nth-child(5){animation-delay:.28s}
+    .rank-list li:nth-child(6),.art:nth-child(6){animation-delay:.34s}.rank-list li:nth-child(7){animation-delay:.4s}.rank-list li:nth-child(8){animation-delay:.46s}.rank-list li:nth-child(9){animation-delay:.52s}.rank-list li:nth-child(10){animation-delay:.58s}
+    .comment,.cutoff,.prize,.receipt,.mono,.honorable,.exchange-note{animation:softReveal .68s .24s cubic-bezier(.17,.82,.28,1) backwards}
+    @keyframes cardRise{from{opacity:0;transform:translateY(22px) scale(.975)}to{opacity:1;transform:none}}
+    @keyframes softReveal{from{opacity:0;transform:scale(.94);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+    .sparkle-layer{position:fixed;z-index:50;inset:0;overflow:hidden;pointer-events:none;contain:strict}
+    .cursor-sparkle{position:absolute;left:0;top:0;color:var(--spark,#fff);font-style:normal;font-size:var(--size,12px);line-height:1;text-shadow:0 0 6px currentColor,0 0 15px currentColor;will-change:transform,opacity;animation:sparkleFall var(--life,900ms) cubic-bezier(.16,.72,.34,1) forwards}
+    @keyframes sparkleFall{0%{opacity:0;transform:translate(-50%,-70%) scale(.15) rotate(0)}18%{opacity:1;transform:translate(-50%,-45%) scale(1.15) rotate(35deg)}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-35% + var(--fall))) scale(.12) rotate(var(--spin))}}
     .controls{gap:14px}.progress{flex:1;min-width:0}.meta{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}.meta span{color:var(--muted);font-size:11px}.meta b{font:13px Georgia,serif}.meta i{margin:0 5px;color:#6f7ba5;font-style:normal}.track{height:1px;overflow:hidden;background:rgba(225,228,255,.16)}.track i{display:block;height:100%;background:#dedfff;transition:width .25s}
     @media(max-aspect-ratio:6/5),(max-width:760px){
       body{overflow:auto}.app{min-height:100svh;overflow:auto;grid-template-rows:42px auto 58px;padding:7px}
-      .hint{display:none}.stage{width:100%;min-height:calc(100svh - 121px);aspect-ratio:auto}.slide{min-height:calc(100svh - 121px);height:auto;padding:23px 17px 56px}#slide{height:auto;min-height:calc(100svh - 121px);overflow:visible}
+      .hint{display:none}.stage{width:100%;min-height:calc(100svh - 121px);aspect-ratio:auto;overflow:visible}.slide{min-height:calc(100svh - 121px);height:auto;padding:23px 17px 56px}#slide{height:auto;min-height:calc(100svh - 121px);overflow:visible}
       .title{min-height:80px}.reward{min-width:122px}.agenda-row{grid-template-columns:36px 1fr}.agenda-row p{display:none}
       .split,.chat-grid,.winner,.closing,.exchange{grid-template-columns:1fr}.comment,.cutoff{min-height:192px}.rank-list.compact{grid-template-columns:1fr}
       .winner{height:auto;align-content:start;padding-top:16px}.winner-no{display:none}.prize{min-height:144px}
       .podium,.highlights,.arts{grid-template-columns:1fr}.podium article,.highlight,.art{min-height:112px}
       .honorable{grid-template-columns:auto auto 1fr auto}.honorable span{grid-column:1/-1}.bottom-note,.whisper{position:static;margin-top:16px}.mono{display:none}
     }
-    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}.sparkle-layer{display:none}}
   </style>
 </head>
 <body>
@@ -163,6 +187,7 @@
       <button class="icon-btn" id="next" aria-label="다음 슬라이드">→</button>
     </footer>
   </main>
+  <div class="sparkle-layer" id="sparkles" aria-hidden="true"></div>
   <script>
     const labels=["표지","오늘의 시상식","참여시간상","채팅 별별상","팬영상 편집상","클립왕","이달의 클립","팬아터 ①","팬아터 ②","마무리","포인트 교환"];
     const title=(eye,name,reward="")=>`<header class="title"><div><p class="eyebrow">${eye}</p><h2>${name}</h2></div>${reward?`<div class="reward"><small>REWARD</small><strong>${reward}</strong></div>`:""}</header>`;
@@ -207,12 +232,12 @@
       `<section class="slide">${title("AWARD 01 · WATCH TIME","별별 참여시간상","TOP 5 · +1PT")}<div class="split">${rankList(participation)}<aside class="comment"><span class="label">노리 코멘트</span><p class="lead">이번 달은 컷이 되게 촘촘했습니다</p><div class="stat"><b>2–4H</b><span>10위권 시간 차이</span></div><ul><li>방송시간이 적어서 더 박빙이었던 것 같아요…</li><li>10위 안에 못 들었다고 자책은 노노!</li></ul></aside></div></section>`,
       `<section class="slide">${title("AWARD 02 · CHAT","채팅 별별상","TOP 10 · +2PT")}<div class="chat-grid">${rankList(chats,true)}<aside class="cutoff"><p class="label">100위 컷 채팅 수</p><div class="chart"><div><b>9</b><i style="height:56%"></i><span>6월</span></div><div><b>7</b><i style="height:44%"></i><span>7월</span></div><div><b>16</b><i style="height:100%"></i><span>8월</span></div></div><p class="lead">아침뱅도 시도해 보고, 다시 16회!</p><p class="mini">이번 달은 더 많은 분들이랑 만난 것 같아서 좋았습니다</p></aside></div></section>`,
       `<section class="slide">${title("AWARD 03 · FAN VIDEO","이달의 팬영상 편집자")}<div class="winner"><div class="winner-no">01</div><div class="winner-copy"><p>WINNER</p><h3>저기요옷 님</h3><a class="link feature" target="_blank" rel="noreferrer" href="https://www.youtube.com/shorts/O90EzattPTw">최신 유행이라는 ‘너 가난하게 컸어?’ 챌린지 ↗</a><div class="quotes"><span>숏츠 재가동 타이밍에 딱 올라온 영상</span><b>어떻게 보면 유튜브를 다시 켜게 된 계기였습니다!</b></div></div><div class="prize"><small>SPECIAL REWARD</small><b>구독권 + 퀵뷰 1장</b><span>카페 댓글로 수령 안내드리겠습니다.</span></div></div></section>`,
-      `<section class="slide">${title("AWARD 04 · CLIP MAKER","8월 클립왕","TOP 3 · +1PT")}<div class="podium"><article><span class="num">01</span><p>몽이!! 님</p><strong>83<small>개</small></strong><em>‘이노리’가 들어간 제목만 50개 이상… 그래서 숫자 잘못 센 줄 알았는데 맞는 듯...</em></article><article><span class="num">02</span><p>김페슈 님</p><strong>27<small>개</small></strong><em>숏츠각을 엄청 뽑아주셨습니다 · 편집 들어간 것만 3개</em></article><article><span class="num">03</span><p>쩌기요옷 님</p><strong>23<small>개</small></strong><em>꾸준한 지이봤 도움 감사드립니다!</em></article></div><div class="honorable"><span>✦ 번외</span><b>아마추어3부 님</b><b>12개 예상</b><span>그래서 특별 리워드로 알잘딱 선정드렸습니다!</span><em>퀵뷰 1장</em></div><p class="bottom-note">클립·캐치를 따주시면 그 부분만 바로 다운 가능합니다! 유튜브 하이라이트와 숏츠 제작에 댕좋습니다</p></section>`,
+      `<section class="slide">${title("AWARD 04 · CLIP MAKER","8월 클립왕","TOP 3 · +1PT")}<div class="podium"><article><span class="num">01</span><p>몽이!! 님</p><strong>83<small>개</small></strong><em>‘이노리’가 들어간 제목만 50개 이상… 그래서 숫자 잘못 센 줄 알았는데 맞는 듯...</em></article><article><span class="num">02</span><p>김페슈 님</p><strong>27<small>개</small></strong><em>숏츠각을 엄청 뽑아주셨습니다 · 편집 들어간 것만 3개</em></article><article><span class="num">03</span><p>쩌기요옷 님</p><strong>23<small>개</small></strong><em>꾸준한 지이봤 도움 감사드립니다!</em></article></div><div class="honorable"><span>✦ 번외</span><b>아마추어3부 님</b><b>노래클립 약 12개</b><span>그래서 특별 리워드로 알잘딱 선정드렸습니다!</span><em>퀵뷰 1장</em></div><p class="bottom-note">클립·캐치를 따주시면 그 부분만 바로 다운 가능합니다! 유튜브 하이라이트와 숏츠 제작에 큰 도움이 됩니다</p></section>`,
       `<section class="slide">${title("AUGUST HIGHLIGHTS","이달의 유저 클립 & 캐치")}<div class="highlights"><a class="highlight" target="_blank" rel="noreferrer" href="https://vod.sooplive.com/player/204550949"><span class="hno">01</span><div><p>이달의 유저클립</p><h3>몽이!! 님</h3><strong>세구님이 사주셨던 플스5 당근한 이노리</strong><small>조회수 약 161회</small></div><b>↗</b></a><a class="highlight" target="_blank" rel="noreferrer" href="https://vod.sooplive.com/player/204572607/catch"><span class="hno">02</span><div><p>이달의 유저캐치</p><h3>몽환소녀Star 님</h3><strong>마왕이노리) 고세구가 사준 플스5 당근했다</strong><small>조회수 약 4,050회</small></div><b>↗</b></a></div><div class="whisper">여담 · 고이봤 안 올라간 것 같아서 살았습니다</div></section>`,
       `<section class="slide">${title("AWARD 05 · FAN ART · 01","이달의 팬아터","작가별 +1PT")}<div class="arts">${artCards(0,6)}</div></section>`,
       `<section class="slide">${title("AWARD 05 · FAN ART · 02","이달의 팬아터","작가별 +1PT")}<div class="arts">${artCards(6,12)}</div></section>`,
       `<section class="slide closing"><div class="copy"><p class="serif">THANK YOU, SERVANTS</p><h2>8월도 고맙습니다</h2>${rule}<p>채팅도, 클립도, 팬아트도<br>전부 방송을 이어가는 힘이 됐습니다</p><div class="receipt"><b>카페 활동 포인트 수령 안내</b><span>팬영상 · 팬아트 · 리캡</span><span>이노리가 카페 댓글을 달면 간단한 동의 이모티콘이나 SOOP 닉네임을 답글로 남겨주세요.</span></div><a class="link guide" target="_blank" rel="noreferrer" href="https://www.sooplive.com/station/inorisama/post/203168661">포인트 제도 원문 보기 ↗</a></div><div class="mono"><span>P</span><small>INORI</small></div></section>`,
-      `<section class="slide">${title("POINT EXCHANGE · AUGUST","8월 포인트 교환 안내")}<div class="exchange"><div class="settlement"><article class="status"><small>09.02</small><strong>1차 정산 완료</strong><span>8/1–8/31 활동분 · 리캡 제외</span></article><article class="status pending"><small>~ 09.06</small><strong>리캡 정산 예정</strong><span>8월 리캡 포인트</span></article></div><div class="schedule"><article class="date-card"><small>신청 기간</small><strong>09.03 — 09.15</strong></article><article class="date-card"><small>배송 기간</small><strong>09.15 — 09.30</strong></article><a class="form-btn" target="_blank" rel="noreferrer" href="https://forms.gle/BEXQu1djjSfr4xJr9"><span>포인트 교환 신청하기</span><b>↗</b></a></div></div><div class="exchange-note">신청한 포인트만큼 차감되며, 신청하지 않은 포인트는 다음 달로 이월됩니다.</div></section>`
+      `<section class="slide">${title("POINT EXCHANGE · AUGUST","8월 포인트 교환 안내")}<div class="exchange"><div class="settlement"><article class="status"><small>09.02</small><strong>1차 정산 완료</strong><span>카페 활동인 팬아트, 팬영상 제작, 리캡을 제외한 활동 분</span></article><article class="status pending"><small>~ 09.06</small><strong>카페 활동 (팬아트/팬영상제작/리캡) 정산 예정</strong><span>이노리가 남겨드릴 카페 답글에 회신 주셔야 정산됩니다!</span></article></div><div class="schedule"><article class="date-card"><small>신청 기간</small><strong>09.03 — 09.15</strong></article><article class="date-card"><small>배송 기간</small><strong>09.15 — 09.30</strong></article><a class="form-btn" target="_blank" rel="noreferrer" href="https://forms.gle/BEXQu1djjSfr4xJr9"><span>포인트 교환 신청하기</span><b>↗</b></a></div></div><div class="exchange-note">신청한 포인트만큼 차감되며, 신청하지 않은 포인트는 다음 달로 이월됩니다.</div></section>`
     ];
     let index=0,touchX=null;
     const slide=document.getElementById("slide"),label=document.getElementById("label"),current=document.getElementById("current"),bar=document.getElementById("bar");
@@ -224,6 +249,22 @@
     document.getElementById("app").addEventListener("click",e=>{if(e.target.closest("a,button"))return;e.clientX/window.innerWidth<.24?prev():next()});
     addEventListener("keydown",e=>{if(["ArrowRight"," ","Enter","PageDown"].includes(e.key)){e.preventDefault();next()}if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){e.preventDefault();prev()}if(e.key==="Home")go(0);if(e.key==="End")go(slides.length-1);if(e.key.toLowerCase()==="f")document.documentElement.requestFullscreen?.()});
     addEventListener("touchstart",e=>touchX=e.touches[0]?.clientX,{passive:true});addEventListener("touchend",e=>{if(touchX===null)return;const d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>50)d<0?next():prev();touchX=null},{passive:true});
+    const sparkleLayer=document.getElementById("sparkles"),reduceMotion=matchMedia("(prefers-reduced-motion: reduce)"),liveSparkles=new Set(),sparkleColors=["#ffffff","#d8d6ff","#aebcf2","#fff5c8"];
+    let lastSparkle=0;
+    const sparkleAt=(x,y,count=1)=>{
+      if(reduceMotion.matches)return;
+      for(let i=0;i<count;i++){
+        const star=document.createElement("i"),size=7+Math.random()*10;
+        star.className="cursor-sparkle";star.textContent=Math.random()>.32?"✦":"✧";
+        star.style.left=`${x+(Math.random()-.5)*14}px`;star.style.top=`${y+(Math.random()-.5)*10}px`;
+        star.style.setProperty("--size",`${size}px`);star.style.setProperty("--dx",`${(Math.random()-.5)*54}px`);star.style.setProperty("--fall",`${42+Math.random()*72}px`);star.style.setProperty("--spin",`${120+Math.random()*300}deg`);star.style.setProperty("--life",`${720+Math.random()*520}ms`);star.style.setProperty("--spark",sparkleColors[Math.floor(Math.random()*sparkleColors.length)]);
+        sparkleLayer.append(star);liveSparkles.add(star);
+        star.addEventListener("animationend",()=>{liveSparkles.delete(star);star.remove()},{once:true});
+        if(liveSparkles.size>80){const oldest=liveSparkles.values().next().value;liveSparkles.delete(oldest);oldest.remove()}
+      }
+    };
+    addEventListener("pointermove",e=>{if(e.pointerType==="touch")return;const now=performance.now();if(now-lastSparkle<28)return;lastSparkle=now;sparkleAt(e.clientX,e.clientY,Math.random()>.76?2:1)},{passive:true});
+    addEventListener("pointerdown",e=>sparkleAt(e.clientX,e.clientY,7),{passive:true});
     render();
   </script>
 </body>
