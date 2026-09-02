@@ -130,7 +130,7 @@
     .date-card{grid-template-columns:clamp(70px,7vw,112px) 1fr;border-left-width:1px}.date-card strong{font-family:Georgia,serif;letter-spacing:.04em}
     .form-btn{min-height:clamp(62px,6.5vw,104px);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,2vw,32px);color:#09102f;text-decoration:none;background:linear-gradient(100deg,#ebeaff,#c5ccff);font-size:clamp(15px,1.45vw,24px);font-weight:800;transition:.18s}.form-btn:hover{transform:translateY(-3px);box-shadow:0 13px 34px rgba(122,140,213,.24)}.form-btn b{font:clamp(24px,2.4vw,38px) Georgia,serif}
     .exchange-note{margin-top:clamp(13px,1.6vw,25px);padding:clamp(11px,1.1vw,17px) clamp(14px,1.5vw,24px);color:#c9cfea;background:rgba(255,255,255,.045);font-size:clamp(10px,.88vw,15px);text-align:center}
-    .sparkle-layer{position:fixed;z-index:9999;inset:0;width:100%;height:100%;pointer-events:none}
+    .sparkle-layer{position:fixed;z-index:9999;inset:0;width:100%;height:100%;display:block;pointer-events:none}
     .controls{gap:14px}.progress{flex:1;min-width:0}.meta{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}.meta span{color:var(--muted);font-size:11px}.meta b{font:13px Georgia,serif}.meta i{margin:0 5px;color:#6f7ba5;font-style:normal}.track{height:1px;overflow:hidden;background:rgba(225,228,255,.16)}.track i{display:block;height:100%;background:#dedfff;transition:width .25s}
     @media(max-aspect-ratio:6/5),(max-width:760px){
       body{overflow:auto}.app{min-height:100svh;overflow:auto;grid-template-rows:42px auto 58px;padding:7px}
@@ -141,7 +141,7 @@
       .podium,.highlights,.arts{grid-template-columns:1fr}.podium article,.highlight,.art{min-height:112px}
       .honorable{grid-template-columns:auto auto 1fr auto}.honorable span{grid-column:1/-1}.bottom-note,.whisper{position:static;margin-top:16px}.mono{display:none}
     }
-    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}.sparkle-layer{display:none}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
   </style>
 </head>
 <body>
@@ -226,7 +226,7 @@
     document.getElementById("app").addEventListener("click",e=>{if(e.target.closest("a,button"))return;e.clientX/window.innerWidth<.24?prev():next()});
     addEventListener("keydown",e=>{if(["ArrowRight"," ","Enter","PageDown"].includes(e.key)){e.preventDefault();next()}if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){e.preventDefault();prev()}if(e.key==="Home")go(0);if(e.key==="End")go(slides.length-1);if(e.key.toLowerCase()==="f")document.documentElement.requestFullscreen?.()});
     addEventListener("touchstart",e=>touchX=e.touches[0]?.clientX,{passive:true});addEventListener("touchend",e=>{if(touchX===null)return;const d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>50)d<0?next():prev();touchX=null},{passive:true});
-    const sparkleCanvas=document.getElementById("sparkles"),sparkleCtx=sparkleCanvas.getContext("2d"),reduceMotion=matchMedia("(prefers-reduced-motion: reduce)"),sparkleColors=["#ffffff","#ddd9ff","#b9c8ff","#fff2b8"];
+    const sparkleCanvas=document.getElementById("sparkles"),sparkleCtx=sparkleCanvas.getContext("2d"),sparkleColors=["#ffffff","#ddd9ff","#b9c8ff","#fff2b8"];
     let sparkleRatio=1,sparkleFrame=0,lastSparkle=0,sparkleParticles=[];
     const resizeSparkles=()=>{sparkleRatio=Math.min(devicePixelRatio||1,1.5);sparkleCanvas.width=Math.round(innerWidth*sparkleRatio);sparkleCanvas.height=Math.round(innerHeight*sparkleRatio);sparkleCtx.setTransform(sparkleRatio,0,0,sparkleRatio,0,0)};
     const drawSparkles=()=>{
@@ -234,21 +234,22 @@
       sparkleParticles=sparkleParticles.filter(p=>{
         p.x+=p.vx;p.y+=p.vy;p.vy+=p.gravity;p.rotation+=p.spin;p.life-=p.decay;
         if(p.life<=0)return false;
-        sparkleCtx.save();sparkleCtx.translate(p.x,p.y);sparkleCtx.rotate(p.rotation);sparkleCtx.globalAlpha=Math.min(1,p.life*1.8);sparkleCtx.fillStyle=p.color;sparkleCtx.shadowColor=p.color;sparkleCtx.shadowBlur=12;sparkleCtx.font=`700 ${p.size}px Georgia,serif`;sparkleCtx.textAlign="center";sparkleCtx.textBaseline="middle";sparkleCtx.fillText(p.char,0,0);sparkleCtx.restore();
+        sparkleCtx.save();sparkleCtx.translate(p.x,p.y);sparkleCtx.rotate(p.rotation);sparkleCtx.globalAlpha=Math.min(1,p.life*1.9);sparkleCtx.globalCompositeOperation="lighter";sparkleCtx.fillStyle=p.color;sparkleCtx.shadowColor=p.color;sparkleCtx.shadowBlur=14;sparkleCtx.beginPath();
+        for(let point=0;point<8;point++){const radius=point%2?p.size*.22:p.size,angle=-Math.PI/2+point*Math.PI/4,x=Math.cos(angle)*radius,y=Math.sin(angle)*radius;point?sparkleCtx.lineTo(x,y):sparkleCtx.moveTo(x,y)}
+        sparkleCtx.closePath();sparkleCtx.fill();sparkleCtx.restore();
         return true;
       });
       sparkleFrame=sparkleParticles.length?requestAnimationFrame(drawSparkles):0;
     };
     const sparkleAt=(x,y,count=1)=>{
-      if(reduceMotion.matches)return;
       for(let i=0;i<count;i++){
-        sparkleParticles.push({x:x+(Math.random()-.5)*12,y:y+(Math.random()-.5)*8,vx:(Math.random()-.5)*1.5,vy:.7+Math.random()*1.25,gravity:.035+Math.random()*.025,life:1,decay:.014+Math.random()*.008,size:9+Math.random()*11,rotation:Math.random()*Math.PI,spin:(Math.random()-.5)*.09,color:sparkleColors[Math.floor(Math.random()*sparkleColors.length)],char:Math.random()>.25?"✦":"·"});
+        sparkleParticles.push({x:x+(Math.random()-.5)*13,y:y+(Math.random()-.5)*9,vx:(Math.random()-.5)*1.6,vy:.75+Math.random()*1.25,gravity:.035+Math.random()*.025,life:1,decay:.013+Math.random()*.007,size:5+Math.random()*6,rotation:Math.random()*Math.PI,spin:(Math.random()-.5)*.1,color:sparkleColors[Math.floor(Math.random()*sparkleColors.length)]});
       }
       if(sparkleParticles.length>100)sparkleParticles.splice(0,sparkleParticles.length-100);
       if(!sparkleFrame)sparkleFrame=requestAnimationFrame(drawSparkles);
     };
     resizeSparkles();addEventListener("resize",resizeSparkles,{passive:true});
-    addEventListener("pointermove",e=>{if(e.pointerType==="touch")return;const now=performance.now();if(now-lastSparkle<24)return;lastSparkle=now;sparkleAt(e.clientX,e.clientY,Math.random()>.6?3:2)},{passive:true});
+    addEventListener("mousemove",e=>{const now=performance.now();if(now-lastSparkle<22)return;lastSparkle=now;sparkleAt(e.clientX,e.clientY,Math.random()>.55?3:2)},{passive:true});
     addEventListener("pointerdown",e=>sparkleAt(e.clientX,e.clientY,12),{passive:true});
     render();
   </script>
