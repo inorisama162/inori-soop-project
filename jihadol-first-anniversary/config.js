@@ -101,7 +101,7 @@ window.SITE_CONFIG = {
       "short": "뿡",
       "color": "#c4d5f3",
       "photo": "./assets/members/bbungchi.webp",
-      "birthday": "2002.09.13",
+      "birthday": "2001.09.13",
       "debut": "2025.10.05",
       "station": "https://www.sooplive.com/station/bbungchi",
       "resultTitle": "공감하며 장난도 즐기는 스트리머형",
