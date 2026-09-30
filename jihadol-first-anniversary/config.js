@@ -4,10 +4,10 @@
  * 화면에는 배열 순서대로 1~16번을 표시합니다. 순위와 동점은 반올림 전 비율로 결정합니다.
  */
 window.SITE_CONFIG = {
-  "version": "2026-09-30-v6",
+  "version": "2026-09-30-v7",
   "cafeLinks": {
-    "impressions": "https://cafe.naver.com/jihaidol",
-    "quiz": "https://cafe.naver.com/jihaidol"
+    "impressions": "https://cafe.naver.com/f-e/cafes/31568287/menus/101",
+    "quiz": "https://cafe.naver.com/f-e/cafes/31568287/menus/101"
   },
   "anniversary": {
     "crewDays": 365,
@@ -18,6 +18,14 @@ window.SITE_CONFIG = {
   "slideshow": {
     "interval": 6500,
     "photos": [
+      {
+        "src": "./assets/memories/memory-10.webp",
+        "alt": "유치원 교실에서 노란 모자를 쓰고 함께 모인 아바타들"
+      },
+      {
+        "src": "./assets/memories/memory-09.webp",
+        "alt": "대기실에서 나란히 모인 세 아바타"
+      },
       {
         "src": "./assets/memories/memory-01.webp",
         "alt": "함께 모인 네 명의 지하아이돌 아바타"
@@ -45,6 +53,10 @@ window.SITE_CONFIG = {
       {
         "src": "./assets/memories/memory-07.webp",
         "alt": "나무 액자 속 수녀복을 입은 네 아바타"
+      },
+      {
+        "src": "./assets/memories/memory-08.webp",
+        "alt": "가까이 나란히 있는 빨간 머리와 검은 머리 아바타"
       }
     ]
   },
