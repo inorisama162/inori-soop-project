@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- release: 2026.10.06-september-v1.0 -->
+<!-- release: 2026.10.06-september-v1.1 -->
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -162,7 +162,7 @@
   <main class="app" id="app">
     <nav class="rail top" aria-label="발표 진행">
       <div class="brand"><span>INORI</span><i></i><b>MONTHLY AWARDS</b></div>
-      <div class="hint">CLICK · ← → · SPACE</div>
+      <div class="hint">EDGE CLICK · ← → · SPACE</div>
       <button class="icon-btn" id="full" title="전체화면 (F)" aria-label="전체화면">⛶</button>
     </nav>
     <div class="stage">
@@ -215,7 +215,7 @@
     const artCards=()=>arts.map((x,i)=>'<a class="art art-pending" target="_blank" rel="noreferrer" href="'+x[2]+'"><span>'+String(i+1).padStart(2,"0")+'</span><div class="art-thumb placeholder"><b>IMAGE</b><small>원본 이미지 추가 예정</small></div><div><p>'+x[0]+'</p><strong>'+x[1]+'</strong></div><b>↗</b></a>').join("");
     const podiumName=(rank,name,trend,kind)=>'<p class="name-row"><button class="nickname-mask" type="button" data-name="'+name+' 님" aria-label="'+rank+'위 닉네임 공개"><span>✦ 닉네임 공개</span></button><span class="trend '+kind+'">'+trend+'</span></p>';
     const slides=[
-      '<section class="slide cover"><div class="cover-no">09</div><div class="cover-copy"><p class="serif">INORI POINT REGULATION</p>'+rule+'<h1>9월 시청자 어워드</h1><p>채팅부터 팬아트까지, 이번 달의 서번트 총결산</p><div class="start">▶ 화면을 클릭해서 시작</div></div><div class="ticket"><span>INORI</span><b>P</b><small>2026.09</small></div></section>',
+      '<section class="slide cover"><div class="cover-no">09</div><div class="cover-copy"><p class="serif">INORI POINT REGULATION</p>'+rule+'<h1>9월 시청자 어워드</h1><p>채팅부터 팬아트까지, 이번 달의 서번트 총결산</p><div class="start">▶ 오른쪽 끝 클릭 · 키보드 →</div></div><div class="ticket"><span>INORI</span><b>P</b><small>2026.09</small></div></section>',
       '<section class="slide">'+title("SEPTEMBER LINE-UP","오늘의 시상식")+'<div class="agenda">'+[["01","참여시간 별별랭킹","오래 함께해 주신 서번트"],["02","채팅 별별랭킹","방송을 꽉 채워주신 채팅"],["03","이달의 편집왕","센스 있는 팬영상 편집"],["04","이달의 클립왕","9월의 클립 수확 장인"],["05","이달의 팬아터","9월의 작품 모아보기"]].map(x=>'<div class="agenda-row"><span>'+x[0]+'</span><strong>'+x[1]+'</strong><p>'+x[2]+'</p></div>').join("")+'</div><p class="bottom-note">전월 대비 순위 변동도 함께 확인합니다!</p></section>',
       '<section class="slide">'+title("AWARD 01 · WATCH TIME","참여시간 별별랭킹","TOP 5 · +1PT")+'<div class="split">'+rankList(participation)+'<aside class="comment"><span class="label">이번 달 코멘트</span><p class="lead">10위 참여시간</p><div class="stat"><b>79H</b><span>꿀팁?</span></div><ul><li>상위 10위 진입 기준은 약 79시간입니다</li><li>9월에도 오래 함께해 주셔서 감사합니다!</li></ul></aside></div></section>',
       '<section class="slide">'+title("AWARD 02 · CHAT","채팅 별별랭킹","TOP 10 · +2PT")+'<div class="chat-grid">'+rankList(chats,true)+'<aside class="cutoff"><p class="label">9월 채팅 100위</p><div class="century"><button class="nickname-mask inline-mask" type="button" data-name="코코미짱 님" aria-label="100위 닉네임 공개"><span>✦ 닉네임 공개</span></button><b>8회</b></div><p class="lead">100위 등극 축하드립니다</p><ul class="quote-counts"><li><b>3개</b> “ㄹㅇ”</li><li><b>1개</b> “닥치세요그냥~”</li><li><b>3개</b> “이노리님 빨간안경 못생겼어요”</li></ul><p class="mini">제발 모든 시청자분들께서 바른 언어생활을 하시면 좋겠습니다</p></aside></div></section>',
@@ -234,7 +234,14 @@
     document.getElementById("next").onclick=next;document.getElementById("prev").onclick=prev;
     document.getElementById("full").onclick=()=>document.documentElement.requestFullscreen?.();
     slide.addEventListener("click",e=>{const mask=e.target.closest(".nickname-mask");if(!mask)return;e.preventDefault();e.stopPropagation();if(mask.classList.contains("revealed"))return;const name=mask.dataset.name;mask.classList.add("revealed");mask.textContent=name;mask.setAttribute("aria-label",name)});
-    document.getElementById("app").addEventListener("click",e=>{if(e.target.closest("a,button"))return;e.clientX/window.innerWidth<.24?prev():next()});
+    document.getElementById("app").addEventListener("click",e=>{
+      if(e.target.closest("a,button,.title,.agenda,.split,.chat-grid,.winner,.podium,.honorable,.highlights,.arts,.closing,.exchange,.bottom-note,.whisper,.cover-copy,.ticket"))return;
+      const rect=document.querySelector(".stage").getBoundingClientRect();
+      if(e.clientY<rect.top||e.clientY>rect.bottom)return;
+      const edge=Math.min(120,Math.max(48,rect.width*.1));
+      if(e.clientX<=rect.left+edge)prev();
+      else if(e.clientX>=rect.right-edge)next();
+    });
     addEventListener("keydown",e=>{if(e.target.closest&&e.target.closest("button,a"))return;if(["ArrowRight"," ","Enter","PageDown"].includes(e.key)){e.preventDefault();next()}if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){e.preventDefault();prev()}if(e.key==="Home")go(0);if(e.key==="End")go(slides.length-1);if(e.key.toLowerCase()==="f")document.documentElement.requestFullscreen?.()});
     addEventListener("touchstart",e=>touchX=e.touches[0]?.clientX,{passive:true});addEventListener("touchend",e=>{if(touchX===null)return;const d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>50)d<0?next():prev();touchX=null},{passive:true});
     const sparkleCanvas=document.getElementById("sparkles"),sparkleCtx=sparkleCanvas.getContext("2d"),sparkleColors=["#ffffff","#ddd9ff","#b9c8ff","#fff2b8"];
