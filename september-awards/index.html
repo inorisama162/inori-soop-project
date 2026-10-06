@@ -1,0 +1,268 @@
+<!doctype html>
+<!-- release: 2026.10.06-september-v1.0 -->
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>이노리 9월 시청자 어워드</title>
+  <meta name="description" content="방송에서 클릭하며 진행하는 이노리 9월 시청자 어워드">
+  <style>
+    :root{
+      --night:#060a25;--night2:#0a1238;--ink:#f8f9ff;--muted:#aeb7d8;
+      --lav:#c9c7ff;--blue:#718ad7;--gold:#fff6c8;--line:rgba(228,231,255,.22)
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--night);color:var(--ink)}
+    body{font-family:Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;overflow:hidden}
+    button,a{-webkit-tap-highlight-color:transparent}
+    button{font:inherit}
+    .app{
+      position:relative;min-height:100svh;overflow:hidden;isolation:isolate;
+      display:grid;grid-template-rows:44px minmax(0,1fr) 56px;gap:10px;padding:10px 18px;
+      background:
+        radial-gradient(circle at 18% 24%,rgba(99,125,202,.36),transparent 30rem),
+        radial-gradient(circle at 82% 72%,rgba(139,131,215,.22),transparent 34rem),
+        linear-gradient(135deg,var(--night2),#080d2a 48%,#05081d)
+    }
+    .app:before{
+      content:"";position:absolute;inset:0;z-index:-2;opacity:.26;
+      background-image:radial-gradient(circle,rgba(255,255,255,.72) 0 1px,transparent 1.5px),radial-gradient(circle,rgba(197,196,255,.68) 0 1px,transparent 1.5px);
+      background-position:0 0,25px 31px;background-size:83px 83px,127px 127px;
+      mask-image:linear-gradient(to bottom,#000,transparent 84%)
+    }
+    .rail{position:relative;z-index:5;width:min(100%,1600px);margin:auto;display:flex;align-items:center}
+    .top{justify-content:space-between;color:rgba(241,243,255,.72)}
+    .brand{display:flex;gap:11px;align-items:center;font:12px Georgia,serif;letter-spacing:.18em}
+    .brand i{width:1px;height:15px;background:rgba(255,255,255,.3)}
+    .hint{margin-left:auto;margin-right:8px;font-size:10px;letter-spacing:.18em;opacity:.52}
+    .icon-btn{
+      width:36px;height:36px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.14);
+      border-radius:7px;color:#fff;background:rgba(255,255,255,.04);cursor:pointer
+    }
+    .icon-btn:hover{background:rgba(255,255,255,.12)}
+    .stage{
+      position:relative;width:min(100%,calc((100svh - 140px)*16/9),1600px);aspect-ratio:16/9;
+      min-height:0;margin:auto;border:1px solid rgba(225,228,255,.18);
+      background:linear-gradient(130deg,rgba(71,92,162,.19),transparent 34%),linear-gradient(315deg,rgba(129,116,200,.12),transparent 38%),rgba(6,10,34,.74);
+      box-shadow:0 2rem 5rem rgba(0,0,0,.33),inset 0 0 4rem rgba(126,145,222,.05)
+    }
+    .corner{position:absolute;z-index:4;width:22px;height:22px;pointer-events:none}
+    .corner:before,.corner:after{content:"";position:absolute;background:rgba(237,239,255,.78)}
+    .corner:before{width:100%;height:1px}.corner:after{width:1px;height:100%}
+    .tl{top:-1px;left:-1px}.tr{top:-1px;right:-1px;transform:rotate(90deg)}
+    .bl{bottom:-1px;left:-1px;transform:rotate(-90deg)}.br{bottom:-1px;right:-1px;transform:rotate(180deg)}
+    #slide{height:100%;overflow:hidden;animation:enter .38s cubic-bezier(.2,.8,.2,1) both}
+    @keyframes enter{from{opacity:0;transform:translateX(15px)}to{opacity:1;transform:none}}
+    .slide{position:relative;height:100%;padding:clamp(22px,3.2vw,58px) clamp(26px,4.3vw,82px)}
+    .slide:after{
+      content:"2026.09 · INORI MONTHLY AWARDS";position:absolute;right:clamp(26px,4.3vw,82px);bottom:20px;
+      color:rgba(231,233,255,.34);font:clamp(8px,.7vw,12px) Georgia,serif;letter-spacing:.17em
+    }
+    .title{display:flex;justify-content:space-between;align-items:flex-start;min-height:94px;padding-bottom:clamp(12px,1.5vw,22px);border-bottom:1px solid var(--line)}
+    .eyebrow,.label{margin:0 0 6px;color:#abb8e8;font:clamp(9px,.75vw,13px) Georgia,serif;letter-spacing:.2em}
+    .title h2{margin:0;font-size:clamp(26px,3.3vw,54px);letter-spacing:-.04em}
+    .reward{min-width:clamp(128px,13vw,215px);padding:11px 14px;border-left:3px solid var(--lav);background:linear-gradient(90deg,rgba(126,139,205,.22),transparent)}
+    .reward small{display:block;color:#aab6e5;font:clamp(8px,.62vw,11px) Georgia,serif;letter-spacing:.18em}
+    .reward strong{display:block;margin-top:4px;font-size:clamp(13px,1.18vw,21px)}
+    .cover{display:grid;place-items:center;text-align:center;overflow:hidden}.cover:after,.closing:after{content:none}
+    .cover-no{position:absolute;left:-2%;bottom:-22%;color:transparent;font:clamp(320px,43vw,690px)/.74 Georgia,serif;-webkit-text-stroke:1px rgba(208,214,255,.1)}
+    .cover-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+    .serif{margin:0;color:#c0c9ee;font:clamp(10px,1vw,16px) Georgia,serif;letter-spacing:.27em}
+    .cover h1{margin:clamp(13px,1.9vw,29px) 0 10px;font-size:clamp(38px,6.3vw,104px);line-height:1;letter-spacing:-.065em;text-shadow:0 0 2.3rem rgba(167,176,239,.34)}
+    .cover-copy>p:not(.serif){margin:0;color:#c8cee9;font-size:clamp(13px,1.25vw,22px)}
+    .rule{width:min(384px,50vw);display:flex;align-items:center;margin:22px 0 0}.rule span{flex:1;height:1px;background:rgba(242,244,255,.65)}
+    .rule i{width:7px;height:7px;transform:rotate(45deg);background:#eef0ff}
+    .start{margin-top:clamp(20px,2.7vw,43px);color:rgba(231,233,255,.65);font-size:clamp(10px,.85vw,14px)}
+    .ticket{
+      position:absolute;right:32px;top:32px;width:clamp(70px,7vw,112px);aspect-ratio:.72;display:flex;flex-direction:column;align-items:center;justify-content:center;
+      border:1px solid rgba(228,231,255,.36);background:rgba(164,169,232,.15);clip-path:polygon(8% 0,92% 0,100% 7%,100% 93%,92% 100%,8% 100%,0 93%,0 7%);transform:rotate(4deg)
+    }
+    .ticket span,.ticket small{font:clamp(7px,.55vw,10px) Georgia,serif;letter-spacing:.16em}.ticket b{font:clamp(26px,3vw,50px) Georgia,serif}
+    .agenda{display:grid;gap:clamp(5px,.7vw,12px);margin-top:clamp(13px,2vw,32px)}
+    .agenda-row{display:grid;grid-template-columns:58px 1.05fr 1fr;align-items:baseline;gap:16px;padding:clamp(7px,.95vw,14px) 11px;border-bottom:1px solid rgba(225,228,255,.14)}
+    .agenda-row span{color:#9dacdf;font:clamp(12px,1vw,16px) Georgia,serif}.agenda-row strong{font-size:clamp(15px,1.65vw,28px)}
+    .agenda-row p{margin:0;color:var(--muted);font-size:clamp(11px,1vw,17px)}
+    .bottom-note{position:absolute;left:clamp(26px,4.3vw,82px);bottom:42px;margin:0;color:#c5cbea;font-size:clamp(10px,.9vw,15px)}
+    .split{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(240px,.9fr);gap:clamp(19px,3vw,56px);margin-top:clamp(14px,2vw,34px)}
+    .rank-list{display:grid;gap:clamp(5px,.7vw,11px);margin:0;padding:0;list-style:none}
+    .rank-list li{display:grid;grid-template-columns:37px minmax(128px,.9fr) minmax(64px,1.3fr) minmax(83px,auto);align-items:center;gap:13px;min-height:clamp(37px,4vw,67px);padding:0 9px;border-bottom:1px solid rgba(226,230,255,.13)}
+    .rank{color:#8595cf;font:clamp(12px,1vw,17px) Georgia,serif}
+    .person{display:flex;flex-direction:column;min-width:0}.person b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:clamp(13px,1.25vw,21px)}.person small{color:#7e8aad;font-size:clamp(8px,.66vw,11px)}
+    .nickname-mask{position:relative;width:100%;min-width:0;height:clamp(28px,2.25vw,38px);display:flex;align-items:center;justify-content:flex-start;overflow:hidden;padding:0 clamp(7px,.7vw,11px);border:1px solid rgba(204,210,249,.24);border-radius:4px;color:#dce1fb;background:linear-gradient(110deg,rgba(129,142,205,.28),rgba(197,197,242,.15) 48%,rgba(91,107,178,.27));cursor:pointer;font:700 clamp(9px,.68vw,12px) Georgia,serif;letter-spacing:.11em;text-align:left;transition:.18s}.nickname-mask:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(116deg,transparent 0 8px,rgba(255,255,255,.045) 8px 9px)}.nickname-mask span{position:relative;z-index:1;white-space:nowrap}.nickname-mask:hover,.nickname-mask:focus-visible{border-color:rgba(235,237,255,.62);background:linear-gradient(110deg,rgba(151,162,224,.36),rgba(211,210,251,.21) 48%,rgba(112,128,199,.34));outline:none}.nickname-mask.revealed{height:auto;min-height:0;padding:0;border-color:transparent;background:transparent;color:#fff;cursor:default;font:700 clamp(13px,1.25vw,21px) Pretendard,"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;letter-spacing:0;white-space:normal}.nickname-mask.revealed:before{display:none}.first .nickname-mask.revealed{color:var(--gold)}.rank-list.compact .nickname-mask.revealed{font-size:clamp(10px,.95vw,15px);line-height:1.12}.podium .nickname-mask{width:auto;min-width:clamp(112px,11vw,176px)}.podium .nickname-mask.revealed{font-size:clamp(14px,1.35vw,22px)}
+    .bar{height:4px;overflow:hidden;background:rgba(205,211,243,.09)}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),var(--lav));animation:grow .7s .15s ease both;transform-origin:left}
+    @keyframes grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+    .value{font:clamp(12px,1vw,17px) Georgia,serif;text-align:right}.first .rank,.first .value,.first .person b{color:var(--gold)}
+    .comment,.cutoff{position:relative;padding:clamp(16px,2vw,32px);background:linear-gradient(145deg,rgba(139,151,213,.16),transparent 68%),rgba(12,20,55,.56);border-left:1px solid rgba(221,225,255,.28)}
+    .comment:before,.cutoff:before{content:"“";position:absolute;right:16px;top:-12px;color:rgba(204,207,255,.09);font:clamp(96px,10vw,176px)/1 Georgia,serif}
+    .lead{position:relative;margin:13px 0 18px;font-size:clamp(15px,1.55vw,27px);font-weight:700;line-height:1.35}
+    .stat{display:flex;align-items:baseline;gap:12px;margin:clamp(13px,2vw,32px) 0}.stat b{color:var(--lav);font:clamp(32px,4.8vw,80px)/.9 Georgia,serif}.stat span{color:var(--muted);font-size:clamp(10px,.85vw,14px)}
+    .comment ul{display:grid;gap:9px;margin:0;padding:0;color:var(--muted);font-size:clamp(10px,.88vw,15px);list-style:none}.comment li:before{content:"—";margin-right:7px;color:#929fe0}
+    .chat-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(224px,.72fr);gap:clamp(16px,2.3vw,40px);margin-top:clamp(10px,1.4vw,21px)}
+    .rank-list.compact{grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px}.rank-list.compact li{grid-template-columns:27px minmax(84px,1fr) minmax(32px,.6fr) auto;min-height:clamp(30px,2.9vw,48px);gap:8px;padding:0 5px}
+    .rank-list.compact .person b{white-space:normal;line-height:1.12;font-size:clamp(10px,.95vw,15px)}
+    .cutoff{display:flex;flex-direction:column}.chart{position:relative;z-index:1;flex:1;min-height:112px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(18px,2.2vw,38px);margin:6px 0 8px;border-bottom:1px solid rgba(225,228,255,.25)}
+    .chart div{height:100%;display:grid;grid-template-rows:18px minmax(0,1fr) 24px;justify-items:center;gap:4px}.chart b{font:clamp(12px,1.05vw,18px) Georgia,serif}.chart i{align-self:end;width:clamp(26px,2.7vw,45px);min-height:7px;background:linear-gradient(to top,#5873c2,var(--lav));animation:rise .65s ease both;transform-origin:bottom}
+    @keyframes rise{from{transform:scaleY(0)}to{transform:scaleY(1)}}.chart span{color:#9da8cc;font-size:clamp(9px,.72vw,12px)}.cutoff .lead{margin:8px 0 3px}.mini{margin:0;color:#99a5cb;font-size:clamp(9px,.77vw,13px)}
+    .winner{height:calc(100% - 112px);display:grid;grid-template-columns:clamp(80px,10vw,160px) 1fr minmax(208px,.55fr);align-items:center;gap:clamp(19px,3vw,56px)}
+    .winner-no{align-self:stretch;display:grid;place-items:center;color:transparent;font:clamp(80px,11vw,176px) Georgia,serif;-webkit-text-stroke:1px rgba(210,215,255,.24);writing-mode:vertical-rl}
+    .winner-copy>p{margin:0 0 6px;color:#9dacdf;font:clamp(10px,.9vw,15px) Georgia,serif;letter-spacing:.22em}.winner-copy h3{margin:0 0 clamp(13px,1.8vw,29px);font-size:clamp(36px,5.8vw,96px);line-height:1;letter-spacing:-.055em}
+    .link{display:inline-flex;align-items:center;gap:8px;color:#dfe2ff;text-decoration:none;border-bottom:1px solid rgba(223,226,255,.38)}.link:hover{color:#fff;border-color:#fff}.feature{font-size:clamp(14px,1.4vw,23px);font-weight:700}
+    .quotes{display:grid;gap:5px;margin-top:clamp(18px,2.4vw,40px);padding-left:16px;border-left:2px solid #8ea1e2}.quotes span{color:#aab3d4;font-size:clamp(10px,.88vw,15px)}.quotes b{font-size:clamp(13px,1.15vw,19px)}
+    .prize{position:relative;display:flex;min-height:clamp(160px,19vw,320px);flex-direction:column;justify-content:center;padding:clamp(18px,2.4vw,38px);overflow:hidden;background:linear-gradient(145deg,rgba(238,239,255,.16),rgba(138,145,212,.08));border:1px solid rgba(230,232,255,.3);clip-path:polygon(5% 0,95% 0,100% 6%,100% 94%,95% 100%,5% 100%,0 94%,0 6%)}
+    .prize:before{content:"P";position:absolute;right:13px;bottom:-32px;color:rgba(236,237,255,.07);font:clamp(112px,13vw,208px) Georgia,serif}.prize small{color:#9eabdb;font:clamp(8px,.65vw,11px) Georgia,serif;letter-spacing:.18em}.prize b{position:relative;margin:11px 0;font-size:clamp(18px,2.1vw,36px);line-height:1.25}.prize span{position:relative;color:var(--muted);font-size:clamp(9px,.77vw,13px)}
+    .podium{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:clamp(11px,1.6vw,26px);margin-top:clamp(13px,1.8vw,27px)}
+    .podium article{position:relative;min-height:clamp(130px,16vw,256px);display:flex;flex-direction:column;justify-content:center;padding:clamp(14px,1.8vw,29px);overflow:hidden;border-top:1px solid rgba(225,228,255,.3);background:linear-gradient(145deg,rgba(102,120,189,.16),rgba(13,20,54,.16))}
+    .podium article:first-child{background:linear-gradient(145deg,rgba(172,178,232,.24),rgba(35,43,88,.22));border-top-color:var(--gold)}.podium .num{position:absolute;right:12px;top:-8px;color:rgba(214,218,255,.08);font:clamp(72px,9vw,144px)/1 Georgia,serif}
+    .podium p{position:relative;margin:0;font-size:clamp(14px,1.35vw,22px);font-weight:700}.podium strong{position:relative;margin:3px 0 9px;color:var(--lav);font:clamp(34px,4.6vw,77px)/1 Georgia,serif}.podium article:first-child strong{color:var(--gold)}.podium strong small{margin-left:3px;font:700 .28em sans-serif}.podium em{position:relative;min-height:2.4em;color:#9fa9cd;font-size:clamp(9px,.75vw,13px);font-style:normal;line-height:1.45}
+    .honorable{display:grid;grid-template-columns:auto auto auto auto 1fr auto;align-items:center;gap:11px;margin-top:clamp(10px,1.2vw,19px);padding:clamp(8px,.9vw,14px) 16px;border:1px solid rgba(221,225,255,.18);color:#c9ceeb;font-size:clamp(9px,.72vw,12px)}.honorable b{color:#fff;font-size:clamp(12px,.95vw,16px)}.honorable em{color:var(--gold);font-style:normal}
+    .highlights{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(14px,2vw,32px);margin-top:clamp(16px,2.2vw,35px)}
+    .highlight{position:relative;min-height:clamp(208px,26vw,416px);display:grid;grid-template-columns:clamp(51px,6vw,96px) 1fr auto;align-items:center;gap:clamp(11px,1.4vw,22px);padding:clamp(16px,2.2vw,37px);overflow:hidden;color:inherit;text-decoration:none;border:1px solid rgba(226,229,255,.2);background:linear-gradient(145deg,rgba(102,121,197,.21),transparent 60%),rgba(13,20,55,.42);transition:.18s}.highlight:hover{transform:translateY(-5px);border-color:rgba(232,234,255,.56)}
+    .highlight .hno{color:transparent;font:clamp(45px,5vw,80px) Georgia,serif;-webkit-text-stroke:1px rgba(211,216,255,.28)}.highlight p{margin:0 0 7px;color:#99a8de;font:clamp(9px,.72vw,12px) Georgia,serif;letter-spacing:.14em}.highlight h3{margin:0 0 16px;font-size:clamp(23px,2.9vw,48px);letter-spacing:-.04em}.highlight strong{display:block;max-width:27rem;font-size:clamp(11px,1.05vw,18px);line-height:1.4}.highlight small{display:block;margin-top:10px;color:#909cc5;font-size:clamp(9px,.72vw,12px)}
+    .whisper{position:absolute;left:clamp(26px,4.3vw,82px);bottom:41px;color:rgba(217,220,246,.55);font-size:clamp(8px,.7vw,12px)}
+    .arts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(9px,1.3vw,20px);margin-top:clamp(13px,1.6vw,24px)}
+    .art{position:relative;min-height:clamp(96px,11.5vw,184px);display:grid;grid-template-columns:clamp(76px,7.2vw,116px) minmax(0,1fr) auto;align-items:center;gap:clamp(9px,1vw,16px);padding:clamp(8px,1vw,15px);overflow:hidden;color:inherit;text-decoration:none;border-left:2px solid rgba(161,175,228,.7);background:linear-gradient(90deg,rgba(99,119,192,.15),rgba(15,23,60,.2));transition:.18s}.art:hover{transform:translateX(4px);background:linear-gradient(90deg,rgba(126,144,211,.24),rgba(15,23,60,.22))}
+    .art>span{position:absolute;z-index:2;left:clamp(11px,1.2vw,19px);top:clamp(11px,1.2vw,19px);padding:3px 6px;color:#eef0ff;background:rgba(5,9,31,.78);font:clamp(9px,.72vw,12px) Georgia,serif}.art-thumb{width:100%;height:clamp(78px,8.6vw,138px);display:block;object-fit:cover;border:1px solid rgba(227,230,255,.22);background:#10183f}.art p{margin:0 0 3px;color:#aab6df;font-size:clamp(9px,.76vw,13px)}.art strong{display:block;font-size:clamp(13px,1.28vw,21px)}.art small{display:block;margin-top:6px;color:#8d99c0;font-size:clamp(8px,.65vw,11px);line-height:1.35}
+    .closing{display:grid;grid-template-columns:1fr minmax(192px,.42fr);align-items:center;gap:48px}.closing h2{margin:9px 0 0;font-size:clamp(45px,6.4vw,109px);letter-spacing:-.065em;line-height:1}.closing .copy>p:not(.serif){margin:clamp(13px,1.7vw,26px) 0 0;color:#bec5e4;font-size:clamp(14px,1.25vw,21px);line-height:1.6}
+    .receipt{width:min(100%,624px);display:grid;gap:5px;margin-top:clamp(16px,2vw,32px);padding:clamp(13px,1.3vw,21px);border-left:3px solid var(--lav);background:linear-gradient(90deg,rgba(123,139,205,.18),transparent)}.receipt b{font-size:clamp(12px,1vw,17px)}.receipt span{color:var(--muted);font-size:clamp(9px,.78vw,13px)}
+    .guide{margin-top:16px;font-size:clamp(10px,.8vw,14px)}.mono{position:relative;aspect-ratio:1;display:grid;place-items:center;border:1px solid rgba(223,226,255,.28);border-radius:50%;box-shadow:0 0 0 1rem rgba(171,176,232,.04),0 0 0 2rem rgba(171,176,232,.025),inset 0 0 3rem rgba(152,163,224,.12)}.mono:before,.mono:after{content:"";position:absolute;inset:13%;border:1px solid rgba(223,226,255,.15);transform:rotate(45deg)}.mono:after{inset:28%}.mono span{font:clamp(80px,12vw,192px)/1 Georgia,serif;text-shadow:0 0 2rem rgba(196,199,255,.35)}.mono small{position:absolute;bottom:13%;font:clamp(8px,.72vw,12px) Georgia,serif;letter-spacing:.22em}
+    .exchange{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(17px,2.2vw,36px);margin-top:clamp(17px,2.2vw,35px)}
+    .settlement,.schedule{display:grid;gap:clamp(10px,1.1vw,18px)}
+    .status,.date-card{display:grid;grid-template-columns:clamp(58px,5.6vw,90px) 1fr;align-items:center;gap:clamp(12px,1.3vw,21px);min-height:clamp(72px,8.1vw,130px);padding:clamp(13px,1.5vw,24px);border-left:3px solid #8097e0;background:linear-gradient(90deg,rgba(96,119,197,.22),rgba(11,19,54,.28))}
+    .status.pending{border-left-color:var(--lav)}.status small,.date-card small{color:#9eacdc;font:clamp(10px,.8vw,14px) Georgia,serif;letter-spacing:.08em}.status strong{font-size:clamp(14px,1.2vw,21px);line-height:1.35}.date-card strong{font-size:clamp(16px,1.55vw,26px)}.status span{grid-column:2;color:var(--muted);font-size:clamp(9px,.76vw,13px);line-height:1.45}
+    .date-card{grid-template-columns:clamp(70px,7vw,112px) 1fr;border-left-width:1px}.date-card strong{font-family:Georgia,serif;letter-spacing:.04em}
+    .form-btn{min-height:clamp(62px,6.5vw,104px);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,2vw,32px);color:#09102f;text-decoration:none;background:linear-gradient(100deg,#ebeaff,#c5ccff);font-size:clamp(15px,1.45vw,24px);font-weight:800;transition:.18s}.form-btn:hover{transform:translateY(-3px);box-shadow:0 13px 34px rgba(122,140,213,.24)}.form-btn b{font:clamp(24px,2.4vw,38px) Georgia,serif}
+    .exchange-note{margin-top:clamp(13px,1.6vw,25px);padding:clamp(11px,1.1vw,17px) clamp(14px,1.5vw,24px);color:#c9cfea;background:rgba(255,255,255,.045);font-size:clamp(10px,.88vw,15px);text-align:center}
+    .sparkle-layer{position:fixed;z-index:9999;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+    .controls{gap:14px}.progress{flex:1;min-width:0}.meta{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}.meta span{color:var(--muted);font-size:11px}.meta b{font:13px Georgia,serif}.meta i{margin:0 5px;color:#6f7ba5;font-style:normal}.track{height:1px;overflow:hidden;background:rgba(225,228,255,.16)}.track i{display:block;height:100%;background:#dedfff;transition:width .25s}
+    .person-line{display:flex;align-items:center;gap:7px;min-width:0}.person-line .nickname-mask{flex:1}
+    .trend{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:clamp(42px,3.7vw,60px);padding:4px 6px;border:1px solid rgba(218,222,255,.18);border-radius:999px;font:700 clamp(8px,.58vw,10px) Georgia,serif;letter-spacing:.03em;white-space:nowrap}
+    .trend.up{color:#bcecff;background:rgba(68,174,217,.13);border-color:rgba(123,214,246,.25)}.trend.down{color:#ffc7df;background:rgba(210,91,145,.12);border-color:rgba(245,157,196,.23)}.trend.new{color:#fff1a8;background:rgba(224,188,75,.13);border-color:rgba(255,230,135,.28)}.trend.same{color:#9aa6cc;background:rgba(142,153,196,.07)}
+    .rank-list li{grid-template-columns:37px minmax(188px,1.15fr) minmax(64px,1.1fr) minmax(83px,auto)}.rank-list.compact li{grid-template-columns:27px minmax(145px,1.2fr) minmax(30px,.48fr) auto}.rank-list.compact .trend{min-width:38px;padding:3px 5px;font-size:clamp(7px,.5vw,9px)}
+    .century{position:relative;z-index:1;display:flex;align-items:center;gap:12px;margin:10px 0}.century .inline-mask{width:min(100%,200px)}.century b{color:var(--gold);font:clamp(24px,2.5vw,42px) Georgia,serif}
+    .quote-counts{position:relative;z-index:1;display:grid;gap:6px;margin:7px 0 12px;padding:0;list-style:none;color:#aeb7d8;font-size:clamp(9px,.72vw,12px)}.quote-counts li{padding-bottom:5px;border-bottom:1px solid rgba(225,228,255,.1)}.quote-counts b{margin-right:6px;color:#dfe2ff}
+    .podium .name-row{display:flex;align-items:center;gap:7px}.podium .name-row .nickname-mask{flex:1;min-width:0}.podium .trend{position:relative}
+    .honorable.plea{grid-template-columns:auto minmax(0,1fr) auto}.honorable.plea b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .arts.three{margin-top:clamp(28px,4vw,68px)}.arts.three .art{min-height:clamp(160px,22vw,350px);grid-template-columns:clamp(105px,11vw,176px) minmax(0,1fr) auto}
+    .art-thumb.placeholder{display:grid;place-items:center;align-content:center;gap:5px;background:linear-gradient(145deg,rgba(158,163,225,.18),rgba(50,63,122,.12));color:#c8cdf0}.art-thumb.placeholder b{font:clamp(15px,1.5vw,25px) Georgia,serif;letter-spacing:.16em}.art-thumb.placeholder small{margin:0;color:#8f9bc5;text-align:center}
+    .form-btn.disabled{color:#aeb6d6;background:linear-gradient(100deg,rgba(235,234,255,.12),rgba(197,204,255,.08));cursor:default}.form-btn.disabled:hover{transform:none;box-shadow:none}
+    @media(max-aspect-ratio:6/5),(max-width:760px){
+      body{overflow:auto}.app{min-height:100svh;overflow:auto;grid-template-rows:42px auto 58px;padding:7px}
+      .hint{display:none}.stage{width:100%;min-height:calc(100svh - 121px);aspect-ratio:auto}.slide{min-height:calc(100svh - 121px);height:auto;padding:23px 17px 56px}#slide{height:auto;min-height:calc(100svh - 121px);overflow:visible}
+      .title{min-height:80px}.reward{min-width:122px}.agenda-row{grid-template-columns:36px 1fr}.agenda-row p{display:none}
+      .split,.chat-grid,.winner,.closing,.exchange{grid-template-columns:1fr}.comment,.cutoff{min-height:192px}.rank-list.compact{grid-template-columns:1fr}
+      .winner{height:auto;align-content:start;padding-top:16px}.winner-no{display:none}.prize{min-height:144px}
+      .podium,.highlights,.arts{grid-template-columns:1fr}.podium article,.highlight,.art{min-height:112px}
+      .honorable{grid-template-columns:auto auto 1fr auto}.honorable span{grid-column:1/-1}.bottom-note,.whisper{position:static;margin-top:16px}.mono{display:none}
+    }
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+  </style>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23060a25%27/%3E%3Cpath d=%27M32 8l5.4 17.6L55 32l-17.6 6.4L32 56l-5.4-17.6L9 32l17.6-6.4z%27 fill=%27%23c9c7ff%27/%3E%3C/svg%3E">
+</head>
+<body>
+  <main class="app" id="app">
+    <nav class="rail top" aria-label="발표 진행">
+      <div class="brand"><span>INORI</span><i></i><b>MONTHLY AWARDS</b></div>
+      <div class="hint">CLICK · ← → · SPACE</div>
+      <button class="icon-btn" id="full" title="전체화면 (F)" aria-label="전체화면">⛶</button>
+    </nav>
+    <div class="stage">
+      <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+      <article id="slide" aria-live="polite"></article>
+    </div>
+    <footer class="rail controls">
+      <button class="icon-btn" id="prev" aria-label="이전 슬라이드">←</button>
+      <div class="progress">
+        <div class="meta"><span id="label"></span><b><span id="current">01</span><i>/</i><span id="total">11</span></b></div>
+        <div class="track"><i id="bar"></i></div>
+      </div>
+      <button class="icon-btn" id="next" aria-label="다음 슬라이드">→</button>
+    </footer>
+  </main>
+  <canvas class="sparkle-layer" id="sparkles" aria-hidden="true"></canvas>
+  <script>
+    const labels=["표지","오늘의 시상식","참여시간 별별랭킹","채팅 별별랭킹","이달의 편집왕","이달의 클립왕","이달의 클립","이달의 팬아터","마무리","포인트 정산"];
+    const title=(eye,name,reward="")=>'<header class="title"><div><p class="eyebrow">'+eye+'</p><h2>'+name+'</h2></div>'+(reward?'<div class="reward"><small>REWARD</small><strong>'+reward+'</strong></div>':'')+'</header>';
+    const rule='<div class="rule"><i></i><span></span><i></i></div>';
+    const trendBadge=x=>x.trend?'<span class="trend '+(x.trendKind||"same")+'" aria-label="'+(x.trendLabel||x.trend)+'">'+x.trend+'</span>':"";
+    const rankList=(items,compact=false)=>{
+      const max=Math.max(...items.map(x=>x.score));
+      return '<ol class="rank-list '+(compact?"compact":"")+'">'+items.map(x=>'<li class="'+(x.rank===1?"first":"")+'"><span class="rank">'+String(x.rank).padStart(2,"0")+'</span><span class="person"><span class="person-line"><button class="nickname-mask" type="button" data-name="'+x.name+' 님" aria-label="'+x.rank+'위 닉네임 공개"><span>✦ 닉네임 공개</span></button>'+trendBadge(x)+'</span></span><span class="bar"><i style="width:'+Math.max(16,x.score/max*100)+'%"></i></span><b class="value">'+x.value+'</b></li>').join("")+'</ol>';
+    };
+    const participation=[
+      {rank:1,name:"물ing",value:"275:25:24",score:275,trend:"— 유지",trendKind:"same"},
+      {rank:2,name:"기계쉑이",value:"178:48:23",score:178,trend:"— 유지",trendKind:"same"},
+      {rank:3,name:"세구띠",value:"153:49:49",score:153,trend:"▲ 1",trendKind:"up",trendLabel:"전월 대비 1위 상승"},
+      {rank:4,name:"고등어새우구",value:"151:05:24",score:151,trend:"NEW!!",trendKind:"new",trendLabel:"순위권 신규 진입"},
+      {rank:5,name:"몽이!!",value:"117:15:15",score:117,trend:"▼ 2",trendKind:"down",trendLabel:"전월 대비 2위 하락"}
+    ];
+    const chats=[
+      {rank:1,name:"몽이!!",value:"6,050",score:6050,trend:"— 유지",trendKind:"same"},
+      {rank:2,name:"캐릉",value:"5,195",score:5195,trend:"▲ 2",trendKind:"up",trendLabel:"전월 대비 2위 상승"},
+      {rank:3,name:"드지",value:"3,842",score:3842,trend:"▼ 1",trendKind:"down",trendLabel:"전월 대비 1위 하락"},
+      {rank:4,name:"자평박3",value:"3,352",score:3352,trend:"▼ 1",trendKind:"down",trendLabel:"전월 대비 1위 하락"},
+      {rank:5,name:"고등어새우구",value:"3,087",score:3087,trend:"NEW!!",trendKind:"new",trendLabel:"순위권 신규 진입"},
+      {rank:6,name:"고기는웰던임",value:"2,911",score:2911,trend:"▼ 1",trendKind:"down",trendLabel:"전월 대비 1위 하락"},
+      {rank:7,name:"달구리!",value:"2,447",score:2447,trend:"— 유지",trendKind:"same"},
+      {rank:8,name:"세구띠",value:"2,277",score:2277,trend:"— 유지",trendKind:"same"},
+      {rank:9,name:"냉동개구리_",value:"2,101",score:2101,trend:"▼ 3",trendKind:"down",trendLabel:"전월 대비 3위 하락"},
+      {rank:10,name:"음움움예이예",value:"1,898",score:1898,trend:"NEW!!",trendKind:"new",trendLabel:"순위권 신규 진입"}
+    ];
+    const arts=[
+      ["작가명 확인 예정","팬아트 #01","https://m.cafe.naver.com/ca-fe/web/cafes/31568287/articles/19284?fromList=true&menuId=10&tc=cafe_article_list"],
+      ["작가명 확인 예정","팬아트 #02","https://m.cafe.naver.com/ca-fe/web/cafes/31568287/articles/18922?fromList=true&menuId=10&tc=cafe_article_list"],
+      ["작가명 확인 예정","팬아트 #03","https://m.cafe.naver.com/ArticleRead.nhn?clubid=31568287&articleid=18916&boardtype=L&menuid=10"]
+    ];
+    const artCards=()=>arts.map((x,i)=>'<a class="art art-pending" target="_blank" rel="noreferrer" href="'+x[2]+'"><span>'+String(i+1).padStart(2,"0")+'</span><div class="art-thumb placeholder"><b>IMAGE</b><small>원본 이미지 추가 예정</small></div><div><p>'+x[0]+'</p><strong>'+x[1]+'</strong></div><b>↗</b></a>').join("");
+    const podiumName=(rank,name,trend,kind)=>'<p class="name-row"><button class="nickname-mask" type="button" data-name="'+name+' 님" aria-label="'+rank+'위 닉네임 공개"><span>✦ 닉네임 공개</span></button><span class="trend '+kind+'">'+trend+'</span></p>';
+    const slides=[
+      '<section class="slide cover"><div class="cover-no">09</div><div class="cover-copy"><p class="serif">INORI POINT REGULATION</p>'+rule+'<h1>9월 시청자 어워드</h1><p>채팅부터 팬아트까지, 이번 달의 서번트 총결산</p><div class="start">▶ 화면을 클릭해서 시작</div></div><div class="ticket"><span>INORI</span><b>P</b><small>2026.09</small></div></section>',
+      '<section class="slide">'+title("SEPTEMBER LINE-UP","오늘의 시상식")+'<div class="agenda">'+[["01","참여시간 별별랭킹","오래 함께해 주신 서번트"],["02","채팅 별별랭킹","방송을 꽉 채워주신 채팅"],["03","이달의 편집왕","센스 있는 팬영상 편집"],["04","이달의 클립왕","9월의 클립 수확 장인"],["05","이달의 팬아터","9월의 작품 모아보기"]].map(x=>'<div class="agenda-row"><span>'+x[0]+'</span><strong>'+x[1]+'</strong><p>'+x[2]+'</p></div>').join("")+'</div><p class="bottom-note">전월 대비 순위 변동도 함께 확인합니다!</p></section>',
+      '<section class="slide">'+title("AWARD 01 · WATCH TIME","참여시간 별별랭킹","TOP 5 · +1PT")+'<div class="split">'+rankList(participation)+'<aside class="comment"><span class="label">이번 달 코멘트</span><p class="lead">10위 참여시간</p><div class="stat"><b>79H</b><span>꿀팁?</span></div><ul><li>상위 10위 진입 기준은 약 79시간입니다</li><li>9월에도 오래 함께해 주셔서 감사합니다!</li></ul></aside></div></section>',
+      '<section class="slide">'+title("AWARD 02 · CHAT","채팅 별별랭킹","TOP 10 · +2PT")+'<div class="chat-grid">'+rankList(chats,true)+'<aside class="cutoff"><p class="label">9월 채팅 100위</p><div class="century"><button class="nickname-mask inline-mask" type="button" data-name="코코미짱 님" aria-label="100위 닉네임 공개"><span>✦ 닉네임 공개</span></button><b>8회</b></div><p class="lead">100위 등극 축하드립니다</p><ul class="quote-counts"><li><b>3개</b> “ㄹㅇ”</li><li><b>1개</b> “닥치세요그냥~”</li><li><b>3개</b> “이노리님 빨간안경 못생겼어요”</li></ul><p class="mini">제발 모든 시청자분들께서 바른 언어생활을 하시면 좋겠습니다</p></aside></div></section>',
+      '<section class="slide">'+title("AWARD 03 · FAN VIDEO","이달의 팬영상 편집자","+1PT")+'<div class="winner"><div class="winner-no">01</div><div class="winner-copy"><p>WINNER</p><h3>2e2e2e2e2 님</h3><a class="link feature" target="_blank" rel="noreferrer" href="https://naver.me/5HyHkYoZ">[이노리] 순산형 골반. ↗</a><div class="quotes"><span>연출부터 마지막 도방 효과음까지</span><b>센스 있는 편집 감사합니다!!</b><span>바아로 마튜브 숏츠로 돚해서 올렸습니다. 감사합니다 &gt;_&lt;</span></div></div><div class="prize"><b>특별 감사 보상</b><span>퀵뷰 + 베이직 구독권</span></div></div></section>',
+      '<section class="slide">'+title("AWARD 04 · CLIP MAKER","이달의 클립왕","TOP 3 · +1PT")+'<div class="podium"><article><span class="num">01</span>'+podiumName(1,"몽이!!","— 유지","same")+'<strong>133<small>개</small></strong><em>언제 한번 유저클립이 엄청 생겨서 머지?! 했는데 팬영상 제작을 위함이었던 것 같네요..!!</em></article><article><span class="num">02</span>'+podiumName(2,"페슈_","— 유지","same")+'<strong>13<small>개</small></strong><em>림버스 클립은 게임을 모르면 따기 힘든데, 그런 쪽에서도 재미를 챙겨주셔서 감사합니다!</em></article><article><span class="num">02</span>'+podiumName(2,"ㄹㅇ뇨리코딱","NEW!!","new")+'<strong>13<small>개</small></strong><em>지이봤 도움 감사드립니다! · ㄹㅇ 솔직 코멘트: 님이 왜 2위..?</em></article></div><div class="honorable plea"><span>✦ 이번 달 코멘트</span><b>얘들아… 다들 클립이나 캐치 많이 부탁해 ㅜㅅㅜ &lt;3</b><span>좋아하는 부분 돌려보기에도 좋습니다.!</span></div></section>',
+      '<section class="slide">'+title("SEPTEMBER HIGHLIGHTS","이달의 유저 클립 & 캐치")+'<div class="highlights"><a class="highlight" target="_blank" rel="noreferrer" href="https://vod.sooplive.com/player/207618557"><span class="hno">01</span><div><p>이달의 유저클립</p><h3>몽이!! 님</h3><strong>마평 ㄹㅈㄷ) 농농네버다이 ㅋㅋㅋㅋ</strong><small>58초 · 2026.09.20</small></div><b>↗</b></a><a class="highlight" target="_blank" rel="noreferrer" href="https://vod.sooplive.com/player/207923267/catch"><span class="hno">02</span><div><p>이달의 유저캐치</p><h3>캐릉 님</h3><strong>[캐치]찐목노리 ㅅㅅㅅㅅ</strong><small>59초 · 2026.09.23</small></div><b>↗</b></a></div><div class="whisper">반응·리액션 클립은 선정에서 제외했습니다</div></section>',
+      '<section class="slide">'+title("AWARD 05 · FAN ART","이달의 팬아터","작가별 +1PT")+'<div class="arts three">'+artCards()+'</div><p class="bottom-note">작가명과 원본 이미지는 추후 교체 예정입니다</p></section>',
+      '<section class="slide closing"><div class="copy"><p class="serif">THANK YOU, SERVANTS</p><h2>9월도 고맙습니다</h2>'+rule+'<p>채팅도, 클립도, 팬아트도<br>전부 방송을 이어가는 힘이 됐습니다</p><div class="receipt"><b>9월 활동 포인트 수령 안내</b><span>참여시간 · 채팅 · 클립: 방송 후 순차 반영</span><span>팬영상 · 팬아트: 카페 댓글 확인 후 반영</span><span>정산 내역 확인 방식은 새 사이트로 교체 예정입니다.</span></div><a class="link guide" target="_blank" rel="noreferrer" href="https://www.sooplive.com/station/inorisama/post/203168661">포인트 제도 원문 보기 ↗</a></div><div class="mono"><span>P</span><small>INORI</small></div></section>',
+      '<section class="slide">'+title("POINT SETTLEMENT · SEPTEMBER","9월 포인트 정산 안내")+'<div class="exchange"><div class="settlement"><article class="status"><small>09.01—09.30</small><strong>9월 활동분</strong><span>참여시간 · 채팅 · 클립 기록 기준</span></article><article class="status pending"><small>임시 안내</small><strong>방송 후 순차 정산</strong><span>팬영상·팬아트는 카페 댓글 확인 후 반영합니다.</span></article></div><div class="schedule"><article class="date-card"><small>방송 활동</small><strong>참여시간 · 채팅 · 클립</strong></article><article class="date-card"><small>카페 활동</small><strong>팬영상 · 팬아트</strong></article><div class="form-btn disabled"><span>정산 확인 페이지 준비 중</span><b>···</b></div></div></div><div class="exchange-note">집계표와 포인트 확인 방식은 새 사이트 적용 시 최종 안내드리겠습니다.</div></section>'
+    ];
+    let index=0,touchX=null;
+    const slide=document.getElementById("slide"),label=document.getElementById("label"),current=document.getElementById("current"),bar=document.getElementById("bar");
+    document.getElementById("total").textContent=String(slides.length).padStart(2,"0");
+    const render=()=>{slide.style.animation="none";void slide.offsetWidth;slide.style.animation="";slide.innerHTML=slides[index];label.textContent=labels[index];current.textContent=String(index+1).padStart(2,"0");bar.style.width=((index+1)/slides.length*100)+"%";document.getElementById("prev").disabled=index===0;document.getElementById("next").disabled=index===slides.length-1};
+    const go=n=>{index=Math.max(0,Math.min(n,slides.length-1));render()},next=()=>go(index+1),prev=()=>go(index-1);
+    document.getElementById("next").onclick=next;document.getElementById("prev").onclick=prev;
+    document.getElementById("full").onclick=()=>document.documentElement.requestFullscreen?.();
+    slide.addEventListener("click",e=>{const mask=e.target.closest(".nickname-mask");if(!mask)return;e.preventDefault();e.stopPropagation();if(mask.classList.contains("revealed"))return;const name=mask.dataset.name;mask.classList.add("revealed");mask.textContent=name;mask.setAttribute("aria-label",name)});
+    document.getElementById("app").addEventListener("click",e=>{if(e.target.closest("a,button"))return;e.clientX/window.innerWidth<.24?prev():next()});
+    addEventListener("keydown",e=>{if(e.target.closest&&e.target.closest("button,a"))return;if(["ArrowRight"," ","Enter","PageDown"].includes(e.key)){e.preventDefault();next()}if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){e.preventDefault();prev()}if(e.key==="Home")go(0);if(e.key==="End")go(slides.length-1);if(e.key.toLowerCase()==="f")document.documentElement.requestFullscreen?.()});
+    addEventListener("touchstart",e=>touchX=e.touches[0]?.clientX,{passive:true});addEventListener("touchend",e=>{if(touchX===null)return;const d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>50)d<0?next():prev();touchX=null},{passive:true});
+    const sparkleCanvas=document.getElementById("sparkles"),sparkleCtx=sparkleCanvas.getContext("2d"),sparkleColors=["#ffffff","#ddd9ff","#b9c8ff","#fff2b8"];
+    let sparkleRatio=1,sparkleFrame=0,lastSparkle=0,sparkleParticles=[];
+    const resizeSparkles=()=>{sparkleRatio=Math.min(devicePixelRatio||1,1.5);sparkleCanvas.width=Math.round(innerWidth*sparkleRatio);sparkleCanvas.height=Math.round(innerHeight*sparkleRatio);sparkleCtx.setTransform(sparkleRatio,0,0,sparkleRatio,0,0)};
+    const drawSparkles=()=>{
+      sparkleCtx.clearRect(0,0,innerWidth,innerHeight);
+      sparkleParticles=sparkleParticles.filter(p=>{
+        p.x+=p.vx;p.y+=p.vy;p.vy+=p.gravity;p.rotation+=p.spin;p.life-=p.decay;
+        if(p.life<=0)return false;
+        sparkleCtx.save();sparkleCtx.translate(p.x,p.y);sparkleCtx.rotate(p.rotation);sparkleCtx.globalAlpha=Math.min(1,p.life*1.9);sparkleCtx.globalCompositeOperation="lighter";sparkleCtx.fillStyle=p.color;sparkleCtx.shadowColor=p.color;sparkleCtx.shadowBlur=14;sparkleCtx.beginPath();
+        for(let point=0;point<8;point++){const radius=point%2?p.size*.22:p.size,angle=-Math.PI/2+point*Math.PI/4,x=Math.cos(angle)*radius,y=Math.sin(angle)*radius;point?sparkleCtx.lineTo(x,y):sparkleCtx.moveTo(x,y)}
+        sparkleCtx.closePath();sparkleCtx.fill();sparkleCtx.restore();
+        return true;
+      });
+      sparkleFrame=sparkleParticles.length?requestAnimationFrame(drawSparkles):0;
+    };
+    const sparkleAt=(x,y,count=1)=>{
+      for(let i=0;i<count;i++){
+        sparkleParticles.push({x:x+(Math.random()-.5)*13,y:y+(Math.random()-.5)*9,vx:(Math.random()-.5)*1.6,vy:.75+Math.random()*1.25,gravity:.035+Math.random()*.025,life:1,decay:.013+Math.random()*.007,size:5+Math.random()*6,rotation:Math.random()*Math.PI,spin:(Math.random()-.5)*.1,color:sparkleColors[Math.floor(Math.random()*sparkleColors.length)]});
+      }
+      if(sparkleParticles.length>100)sparkleParticles.splice(0,sparkleParticles.length-100);
+      if(!sparkleFrame)sparkleFrame=requestAnimationFrame(drawSparkles);
+    };
+    resizeSparkles();addEventListener("resize",resizeSparkles,{passive:true});
+    addEventListener("mousemove",e=>{const now=performance.now();if(now-lastSparkle<22)return;lastSparkle=now;sparkleAt(e.clientX,e.clientY,Math.random()>.55?3:2)},{passive:true});
+    addEventListener("pointerdown",e=>sparkleAt(e.clientX,e.clientY,12),{passive:true});
+    render();
+  </script>
+</body>
+</html>
