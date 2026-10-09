@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- release: 2026.10.06-september-v1.1 -->
+<!-- release: 2026.10.09-september-v1.2 -->
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -132,6 +132,16 @@
     .date-card{grid-template-columns:clamp(70px,7vw,112px) 1fr;border-left-width:1px}.date-card strong{font-family:Georgia,serif;letter-spacing:.04em}
     .form-btn{min-height:clamp(62px,6.5vw,104px);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,2vw,32px);color:#09102f;text-decoration:none;background:linear-gradient(100deg,#ebeaff,#c5ccff);font-size:clamp(15px,1.45vw,24px);font-weight:800;transition:.18s}.form-btn:hover{transform:translateY(-3px);box-shadow:0 13px 34px rgba(122,140,213,.24)}.form-btn b{font:clamp(24px,2.4vw,38px) Georgia,serif}
     .exchange-note{margin-top:clamp(13px,1.6vw,25px);padding:clamp(11px,1.1vw,17px) clamp(14px,1.5vw,24px);color:#c9cfea;background:rgba(255,255,255,.045);font-size:clamp(10px,.88vw,15px);text-align:center}
+    .exchange.detailed{margin-top:clamp(12px,1.5vw,24px)}
+    .exchange.detailed .settlement,.exchange.detailed .schedule{gap:clamp(7px,.75vw,12px)}
+    .exchange.detailed .status{min-height:clamp(62px,6.5vw,104px);padding:clamp(10px,1.1vw,17px)}
+    .portal-card{display:grid;gap:5px;min-height:clamp(78px,8vw,128px);padding:clamp(12px,1.35vw,22px);border:1px solid rgba(226,229,255,.18);background:linear-gradient(145deg,rgba(122,139,207,.18),rgba(12,20,55,.28))}
+    .portal-card small{color:#9eacdc;font:clamp(9px,.68vw,12px) Georgia,serif;letter-spacing:.13em}.portal-card strong{font-size:clamp(15px,1.35vw,23px)}.portal-card span{color:var(--muted);font-size:clamp(9px,.74vw,13px);line-height:1.45}
+    .exchange.detailed .form-btn{min-height:clamp(54px,5.2vw,84px)}
+    .timeline{display:grid;border:1px solid rgba(226,229,255,.16);background:rgba(255,255,255,.025)}
+    .timeline-row{display:grid;grid-template-columns:clamp(42px,4vw,64px) clamp(83px,7vw,112px) 1fr;align-items:center;gap:clamp(8px,.85vw,14px);min-height:clamp(42px,4.3vw,69px);padding:clamp(7px,.7vw,11px) clamp(10px,1vw,16px)}.timeline-row+.timeline-row{border-top:1px solid rgba(226,229,255,.1)}
+    .timeline-row small{color:#93a2d5;font-size:clamp(8px,.62vw,11px)}.timeline-row strong{color:#eef0ff;font:clamp(11px,.9vw,15px) Georgia,serif}.timeline-row span{color:var(--muted);font-size:clamp(9px,.7vw,12px);line-height:1.35}
+    .settlement-slide .exchange-note{text-align:left;line-height:1.45}
     .sparkle-layer{position:fixed;z-index:9999;inset:0;width:100%;height:100%;display:block;pointer-events:none}
     .controls{gap:14px}.progress{flex:1;min-width:0}.meta{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}.meta span{color:var(--muted);font-size:11px}.meta b{font:13px Georgia,serif}.meta i{margin:0 5px;color:#6f7ba5;font-style:normal}.track{height:1px;overflow:hidden;background:rgba(225,228,255,.16)}.track i{display:block;height:100%;background:#dedfff;transition:width .25s}
     .person-line{display:flex;align-items:center;gap:7px;min-width:0}.person-line .nickname-mask{flex:1}
@@ -150,6 +160,7 @@
       .hint{display:none}.stage{width:100%;min-height:calc(100svh - 121px);aspect-ratio:auto}.slide{min-height:calc(100svh - 121px);height:auto;padding:23px 17px 56px}#slide{height:auto;min-height:calc(100svh - 121px);overflow:visible}
       .title{min-height:80px}.reward{min-width:122px}.agenda-row{grid-template-columns:36px 1fr}.agenda-row p{display:none}
       .split,.chat-grid,.winner,.closing,.exchange{grid-template-columns:1fr}.comment,.cutoff{min-height:192px}.rank-list.compact{grid-template-columns:1fr}
+      .timeline-row{grid-template-columns:44px 88px 1fr}
       .winner{height:auto;align-content:start;padding-top:16px}.winner-no{display:none}.prize{min-height:144px}
       .podium,.highlights,.arts{grid-template-columns:1fr}.podium article,.highlight,.art{min-height:112px}
       .honorable{grid-template-columns:auto auto 1fr auto}.honorable span{grid-column:1/-1}.bottom-note,.whisper{position:static;margin-top:16px}.mono{display:none}
@@ -172,7 +183,7 @@
     <footer class="rail controls">
       <button class="icon-btn" id="prev" aria-label="이전 슬라이드">←</button>
       <div class="progress">
-        <div class="meta"><span id="label"></span><b><span id="current">01</span><i>/</i><span id="total">11</span></b></div>
+        <div class="meta"><span id="label"></span><b><span id="current">01</span><i>/</i><span id="total">10</span></b></div>
         <div class="track"><i id="bar"></i></div>
       </div>
       <button class="icon-btn" id="next" aria-label="다음 슬라이드">→</button>
@@ -208,9 +219,9 @@
       {rank:10,name:"음움움예이예",value:"1,898",score:1898,trend:"NEW!!",trendKind:"new",trendLabel:"순위권 신규 진입"}
     ];
     const arts=[
-      ["작가명 확인 예정","팬아트 #01","https://m.cafe.naver.com/ca-fe/web/cafes/31568287/articles/19284?fromList=true&menuId=10&tc=cafe_article_list"],
-      ["작가명 확인 예정","팬아트 #02","https://m.cafe.naver.com/ca-fe/web/cafes/31568287/articles/18922?fromList=true&menuId=10&tc=cafe_article_list"],
-      ["작가명 확인 예정","팬아트 #03","https://m.cafe.naver.com/ArticleRead.nhn?clubid=31568287&articleid=18916&boardtype=L&menuid=10"]
+      ["토깨이보니","포메노리안","https://cafe.naver.com/f-e/cafes/31568287/articles/18916?boardtype=I&menuid=10&referrerAllArticles=false&page=2"],
+      ["하나둘3","백수노리","https://cafe.naver.com/f-e/cafes/31568287/articles/18922?boardtype=I&menuid=10&referrerAllArticles=false&page=2"],
+      ["현잼민","생일파티","https://cafe.naver.com/f-e/cafes/31568287/articles/19284?boardtype=I&menuid=10&referrerAllArticles=false"]
     ];
     const artCards=()=>arts.map((x,i)=>'<a class="art art-pending" target="_blank" rel="noreferrer" href="'+x[2]+'"><span>'+String(i+1).padStart(2,"0")+'</span><div class="art-thumb placeholder"><b>IMAGE</b><small>원본 이미지 추가 예정</small></div><div><p>'+x[0]+'</p><strong>'+x[1]+'</strong></div><b>↗</b></a>').join("");
     const podiumName=(rank,name,trend,kind)=>'<p class="name-row"><button class="nickname-mask" type="button" data-name="'+name+' 님" aria-label="'+rank+'위 닉네임 공개"><span>✦ 닉네임 공개</span></button><span class="trend '+kind+'">'+trend+'</span></p>';
@@ -222,9 +233,9 @@
       '<section class="slide">'+title("AWARD 03 · FAN VIDEO","이달의 팬영상 편집자","+1PT")+'<div class="winner"><div class="winner-no">01</div><div class="winner-copy"><p>WINNER</p><h3>2e2e2e2e2 님</h3><a class="link feature" target="_blank" rel="noreferrer" href="https://naver.me/5HyHkYoZ">[이노리] 순산형 골반. ↗</a><div class="quotes"><span>연출부터 마지막 도방 효과음까지</span><b>센스 있는 편집 감사합니다!!</b><span>바아로 마튜브 숏츠로 돚해서 올렸습니다. 감사합니다 &gt;_&lt;</span></div></div><div class="prize"><b>특별 감사 보상</b><span>퀵뷰 + 베이직 구독권</span></div></div></section>',
       '<section class="slide">'+title("AWARD 04 · CLIP MAKER","이달의 클립왕","TOP 3 · +1PT")+'<div class="podium"><article><span class="num">01</span>'+podiumName(1,"몽이!!","— 유지","same")+'<strong>133<small>개</small></strong><em>언제 한번 유저클립이 엄청 생겨서 머지?! 했는데 팬영상 제작을 위함이었던 것 같네요..!!</em></article><article><span class="num">02</span>'+podiumName(2,"페슈_","— 유지","same")+'<strong>13<small>개</small></strong><em>림버스 클립은 게임을 모르면 따기 힘든데, 그런 쪽에서도 재미를 챙겨주셔서 감사합니다!</em></article><article><span class="num">02</span>'+podiumName(2,"ㄹㅇ뇨리코딱","NEW!!","new")+'<strong>13<small>개</small></strong><em>지이봤 도움 감사드립니다! · ㄹㅇ 솔직 코멘트: 님이 왜 2위..?</em></article></div><div class="honorable plea"><span>✦ 이번 달 코멘트</span><b>얘들아… 다들 클립이나 캐치 많이 부탁해 ㅜㅅㅜ &lt;3</b><span>좋아하는 부분 돌려보기에도 좋습니다.!</span></div></section>',
       '<section class="slide">'+title("SEPTEMBER HIGHLIGHTS","이달의 유저 클립 & 캐치")+'<div class="highlights"><a class="highlight" target="_blank" rel="noreferrer" href="https://vod.sooplive.com/player/207618557"><span class="hno">01</span><div><p>이달의 유저클립</p><h3>몽이!! 님</h3><strong>마평 ㄹㅈㄷ) 농농네버다이 ㅋㅋㅋㅋ</strong><small>58초 · 2026.09.20</small></div><b>↗</b></a><a class="highlight" target="_blank" rel="noreferrer" href="https://vod.sooplive.com/player/207923267/catch"><span class="hno">02</span><div><p>이달의 유저캐치</p><h3>캐릉 님</h3><strong>[캐치]찐목노리 ㅅㅅㅅㅅ</strong><small>59초 · 2026.09.23</small></div><b>↗</b></a></div><div class="whisper">반응·리액션 클립은 선정에서 제외했습니다</div></section>',
-      '<section class="slide">'+title("AWARD 05 · FAN ART","이달의 팬아터","작가별 +1PT")+'<div class="arts three">'+artCards()+'</div><p class="bottom-note">작가명과 원본 이미지는 추후 교체 예정입니다</p></section>',
-      '<section class="slide closing"><div class="copy"><p class="serif">THANK YOU, SERVANTS</p><h2>9월도 고맙습니다</h2>'+rule+'<p>채팅도, 클립도, 팬아트도<br>전부 방송을 이어가는 힘이 됐습니다</p><div class="receipt"><b>9월 활동 포인트 수령 안내</b><span>참여시간 · 채팅 · 클립: 방송 후 순차 반영</span><span>팬영상 · 팬아트: 카페 댓글 확인 후 반영</span><span>정산 내역 확인 방식은 새 사이트로 교체 예정입니다.</span></div><a class="link guide" target="_blank" rel="noreferrer" href="https://www.sooplive.com/station/inorisama/post/203168661">포인트 제도 원문 보기 ↗</a></div><div class="mono"><span>P</span><small>INORI</small></div></section>',
-      '<section class="slide">'+title("POINT SETTLEMENT · SEPTEMBER","9월 포인트 정산 안내")+'<div class="exchange"><div class="settlement"><article class="status"><small>09.01—09.30</small><strong>9월 활동분</strong><span>참여시간 · 채팅 · 클립 기록 기준</span></article><article class="status pending"><small>임시 안내</small><strong>방송 후 순차 정산</strong><span>팬영상·팬아트는 카페 댓글 확인 후 반영합니다.</span></article></div><div class="schedule"><article class="date-card"><small>방송 활동</small><strong>참여시간 · 채팅 · 클립</strong></article><article class="date-card"><small>카페 활동</small><strong>팬영상 · 팬아트</strong></article><div class="form-btn disabled"><span>정산 확인 페이지 준비 중</span><b>···</b></div></div></div><div class="exchange-note">집계표와 포인트 확인 방식은 새 사이트 적용 시 최종 안내드리겠습니다.</div></section>'
+      '<section class="slide">'+title("AWARD 05 · FAN ART","이달의 팬아터","작가별 +1PT")+'<div class="arts three">'+artCards()+'</div><p class="bottom-note">원본 이미지는 전달받은 뒤 썸네일로 추가할 예정입니다</p></section>',
+      '<section class="slide closing"><div class="copy"><p class="serif">THANK YOU, SERVANTS</p><h2>9월도 고맙습니다</h2>'+rule+'<p>채팅도, 클립도, 팬아트도<br>전부 방송을 이어가는 힘이 됐습니다</p><div class="receipt"><b>9월 활동 포인트 수령 안내</b><span>참여시간 · 채팅 · 클립: 10월 12일까지 자동 정산</span><span>팬영상 · 팬아트: 10월 12일까지 카페 댓글 확인 후 정산</span><span>포인트 내역은 통합 안내 사이트에서 확인할 수 있습니다.</span></div><a class="link guide" target="_blank" rel="noreferrer" href="https://www.sooplive.com/station/inorisama/post/203168661">포인트 제도 원문 보기 ↗</a></div><div class="mono"><span>P</span><small>INORI</small></div></section>',
+      '<section class="slide settlement-slide">'+title("POINT SETTLEMENT · SEPTEMBER","9월 포인트 정산 안내")+'<div class="exchange detailed"><div class="settlement"><article class="status"><small>정산 대상</small><strong>09.01—09.30</strong><span>9월 1일부터 30일까지의 활동분</span></article><article class="status"><small>방송 활동</small><strong>10월 12일까지 자동 정산</strong><span>참여시간 별별랭킹 · 채팅 별별랭킹 · 이달의 클립왕 · 리캡 1위</span></article><article class="status pending"><small>카페 활동</small><strong>10월 12일까지 댓글 확인 후 정산</strong><span>팬아트 · 팬영상 / 정산되는 대로 답글에 좋아요 표시 예정</span></article></div><div class="schedule"><article class="portal-card"><small>POINT REGULATION</small><strong>포인트 안내 통합 사이트</strong><span>안내사항 · 아이디 검색 · 교환 내역을 한 곳에서 열람할 수 있습니다.</span></article><a class="form-btn" target="_blank" rel="noreferrer" href="https://inorisama162.github.io/inori-soop-project/point-regulation/"><span>사이트 바로가기</span><b>↗</b></a><div class="timeline"><div class="timeline-row"><small>공개</small><strong>~ 10.12</strong><span>교환 폼 · 9월 시청자 어워드 사이트</span></div><div class="timeline-row"><small>신청</small><strong>10.12—10.20</strong><span>포인트 교환 신청</span></div><div class="timeline-row"><small>배달</small><strong>10.20—10.31</strong><span>포인트 리워드 배달</span></div></div></div></div><div class="exchange-note">* 팬심 배송 서비스가 중단되어 ‘소포담’ 서비스로 배송 시스템을 이전할 예정이며, 현재 크리에이터 심사를 요청해둔 상태입니다. (추후 공지 예정)</div></section>'
     ];
     let index=0,touchX=null;
     const slide=document.getElementById("slide"),label=document.getElementById("label"),current=document.getElementById("current"),bar=document.getElementById("bar");
