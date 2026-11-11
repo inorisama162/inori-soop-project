@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import { LayoutGrid, Star, ScanSearch, MessageCircle, BookOpen, Swords, Gamepad2, PersonStanding, Headphones, Users, UsersRound, UserRoundPlus, Search, RotateCcw, ArrowUp, ChevronDown, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
+import { useEffect, useMemo, useRef, useState, type SVGProps } from "react";
+import { LayoutGrid, Star, ScanSearch, MessageCircle, BookOpen, Gamepad2, PersonStanding, Headphones, Users, UsersRound, UserRoundPlus, Search, RotateCcw, ArrowUp, ChevronDown, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
 import { archiveItems, type ArchiveItem, type StoryEntry } from "@/lib/archive-data";
 import { normalizeItem } from "@/lib/archive-model";
 import { FILTER_LABELS, countTags, isFilterId, matchesFilter, matchesSearch, type FilterId } from "@/lib/archive-query";
@@ -12,13 +12,22 @@ import { recommendedVods, recommendationSummary, summaryBasis } from "@/lib/reco
 type Status = "loading" | "ready" | "partial" | "fallback";
 type StoryKind = StoryEntry["kind"];
 
+function NikkeGunIcon({ size = 24, strokeWidth = 2, ...props }: SVGProps<SVGSVGElement> & { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M3 6h18v5H10l-2 8H3l2-8H3V6Z" />
+      <path d="M10 11h5v2a3 3 0 0 1-3 3H9M12 11v2M6 6v2" />
+    </svg>
+  );
+}
+
 const COLLECTIONS = [
   { id: "all", label: "전체", icon: LayoutGrid },
   { id: "recommended", label: "추천", icon: Star },
   { id: "scope", label: "스코프 시리즈", icon: ScanSearch },
   { id: "original", label: "자체 컨텐츠", icon: MessageCircle },
   { id: "limbus", label: "림버스컴퍼니", icon: BookOpen },
-  { id: "nikke", label: "니케", icon: Swords },
+  { id: "nikke", label: "니케", icon: NikkeGunIcon },
   { id: "storyGames", label: "기타 서브컬쳐", icon: Gamepad2 },
   { id: "motion", label: "풀트·모캡", icon: PersonStanding },
   { id: "asmr", label: "ASMR", icon: Headphones },
