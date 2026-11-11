@@ -155,6 +155,7 @@ export default function ArchiveClient({ vodEndpoint = "/api/vods" }: { vodEndpoi
   const [tagQuery, setTagQuery] = useState("");
   const [gameTagsOnly, setGameTagsOnly] = useState(false);
   const [allTagsVisible, setAllTagsVisible] = useState(false);
+  const [tagsOpen, setTagsOpen] = useState(true);
   const [visibleCount, setVisibleCount] = useState(24);
   const [urlReady, setUrlReady] = useState(false);
   const [resultsOpen, setResultsOpen] = useState(false);
@@ -288,8 +289,9 @@ export default function ArchiveClient({ vodEndpoint = "/api/vods" }: { vodEndpoi
         </div>
       </section>
 
-      <section id="tag-cloud" className="tag-cloud-section" aria-labelledby="tag-cloud-title">
-        <div className="section-heading compact"><h2 id="tag-cloud-title">태그</h2></div>
+      <section id="tag-cloud" className="tag-cloud-section" aria-labelledby="tag-cloud-title" style={tagsOpen ? undefined : { paddingBlock: 20 }}>
+        <div className="section-heading compact" style={tagsOpen ? undefined : { marginBottom: 0 }}><h2 id="tag-cloud-title">태그</h2><button className="reset-filter" type="button" aria-label={tagsOpen ? "태그 접기" : "태그 펼치기"} aria-expanded={tagsOpen} aria-controls="tag-cloud-content" onClick={() => setTagsOpen((open) => !open)}>{tagsOpen ? "접기" : "펼치기"}<ChevronDown size={14} aria-hidden="true" style={{ transform: tagsOpen ? "rotate(180deg)" : undefined }} /></button></div>
+        <div id="tag-cloud-content" hidden={!tagsOpen}>
         <div className="tag-cloud-tools">
           <div className="segmented-control" aria-label="태그 종류"><button type="button" onClick={() => setGameTagsOnly(false)} aria-pressed={!gameTagsOnly}>전체</button><button type="button" onClick={() => setGameTagsOnly(true)} aria-pressed={gameTagsOnly}>게임</button></div>
           <label className="tag-search"><Search size={15} aria-hidden="true" /><span className="sr-only">태그 찾기</span><input value={tagQuery} onChange={(event) => setTagQuery(event.target.value)} placeholder="태그 찾기" type="search" /></label>
@@ -299,6 +301,7 @@ export default function ArchiveClient({ vodEndpoint = "/api/vods" }: { vodEndpoi
           {shownCloudTags.length === 0 ? <p className="tag-empty">해당하는 태그가 없습니다.</p> : null}
         </div>
         {!tagQuery.trim() && cloudTags.length > 20 ? <button className="expand-tags" type="button" onClick={() => setAllTagsVisible(!allTagsVisible)} aria-expanded={allTagsVisible}>{allTagsVisible ? "접기" : "더 보기"}<ChevronDown size={14} aria-hidden="true" /></button> : null}
+        </div>
       </section>
 
       <section id="all-content" className="archive-section" aria-labelledby="archive-title">
