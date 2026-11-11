@@ -1,0 +1,48 @@
+name: Update content wiki
+on:
+  push:
+    branches: [main]
+    paths: ['_content-wiki-source/**', '.github/workflows/content-wiki.yml']
+  workflow_dispatch:
+  schedule:
+    - cron: '17 0 * * *'
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: content-wiki-update
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: _content-wiki-source
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: _content-wiki-source/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run sync
+      - run: npm run build
+        env:
+          BASE_PATH: /inori-soop-project/content-wiki/
+      - name: Publish wiki files
+        run: |
+          rsync -a --delete dist/ ../content-wiki/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/vods.json ../content-wiki
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update content wiki from SOOP'
+            git push
+          fi
+      - name: Rebuild existing Pages site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
