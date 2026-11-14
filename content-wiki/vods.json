@@ -1,11 +1,21 @@
 {
   "items": [
     {
+      "id": 212552903,
+      "title": "시청자 퀴즈쇼 + 니케 올드테일즈 2부 (예열 마헤라 심함 미아내요 ㅠㅠ)",
+      "date": "2026-11-14",
+      "durationSeconds": 30485,
+      "views": 1524,
+      "url": "https://vod.sooplive.com/player/212552903",
+      "category": "다시보기",
+      "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261113_DDB4C151_298563757_2_r"
+    },
+    {
       "id": 212463993,
       "title": "소통 카페 + 수능국어 맛만보기 + 림버스 발푸밤 가챠 맛만보기",
       "date": "2026-11-13",
       "durationSeconds": 15992,
-      "views": 1074,
+      "views": 1449,
       "url": "https://vod.sooplive.com/player/212463993",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261112_7FF4EBD2_298548097_2_r"
@@ -25,7 +35,7 @@
       "title": "소통카페 + 에이징커브 게임 + 니케 올드테일즈 1부까지",
       "date": "2026-11-08",
       "durationSeconds": 25898,
-      "views": 2386,
+      "views": 2389,
       "url": "https://vod.sooplive.com/player/212075999",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261108_9FBC25A6_298439301_2_r"
@@ -35,7 +45,7 @@
       "title": "💪 첫 풀트 링피트 룰렛",
       "date": "2026-11-07",
       "durationSeconds": 25225,
-      "views": 2382,
+      "views": 2384,
       "url": "https://vod.sooplive.com/player/211983049",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261107_BDA5203B_298414367_2_r"
@@ -45,7 +55,7 @@
       "title": "(2부) 림버스 6.5장 워특살",
       "date": "2026-11-07",
       "durationSeconds": 18592,
-      "views": 1703,
+      "views": 1706,
       "url": "https://vod.sooplive.com/player/211931977",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261106_5074E1BB_298402299_2_r"
@@ -55,7 +65,7 @@
       "title": "(1부) 소통 + 카페 + 80억분의 1+ 림버스 발푸밤 pv&워특살 앞부분",
       "date": "2026-11-06",
       "durationSeconds": 16199,
-      "views": 1734,
+      "views": 1739,
       "url": "https://vod.sooplive.com/player/211908909",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261106_7B432A45_298392543_2_r"
@@ -75,7 +85,7 @@
       "title": "[모뱅] 잔잔 소통",
       "date": "2026-11-03",
       "durationSeconds": 8342,
-      "views": 1312,
+      "views": 1315,
       "url": "https://vod.sooplive.com/player/211656965",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261103_13436B5A_298328419_1_r"
@@ -85,7 +95,7 @@
       "title": "할로윈 메이드 노리냥! 풀트 + 애교매도 오므라이스",
       "date": "2026-10-31",
       "durationSeconds": 19729,
-      "views": 2706,
+      "views": 2708,
       "url": "https://vod.sooplive.com/player/211321635",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261031_495DAD5A_298243513_1_r&column=2&t=1793630782"
@@ -95,7 +105,7 @@
       "title": "(2부) 림버스컴퍼니 6.5장 1편 [시간살인시간]",
       "date": "2026-10-31",
       "durationSeconds": 19056,
-      "views": 1726,
+      "views": 1727,
       "url": "https://vod.sooplive.com/player/211258755",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=211258755_1793607730_1_r&column=2&t=1793630933"
@@ -105,7 +115,7 @@
       "title": "(1부) 풀트 테스트 + 카페 + 아아아 게임",
       "date": "2026-10-30",
       "durationSeconds": 8074,
-      "views": 1525,
+      "views": 1527,
       "url": "https://vod.sooplive.com/player/211221761",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261030_BCF96D5B_298222483_1_r&column=2&t=1793630167"
@@ -145,7 +155,7 @@
       "title": "사펑2 같이보기 + 후열 노래깎기",
       "date": "2026-10-23",
       "durationSeconds": 24762,
-      "views": 1918,
+      "views": 1920,
       "url": "https://vod.sooplive.com/player/210622513",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261023_FD519823_298052871_1_r&column=2&t=1792913225"
@@ -485,7 +495,7 @@
       "title": "카페긴급점검 + 건담 수성의마녀 같이보기 5화~12화",
       "date": "2026-08-27",
       "durationSeconds": 27292,
-      "views": 2759,
+      "views": 2760,
       "url": "https://vod.sooplive.com/player/205412169",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260826_DA6739DC_296650941_1_r&column=2&t=1787994238"
@@ -575,7 +585,7 @@
       "title": "이노리 비키니 방셀 가챠✨ + 방셀핀볼",
       "date": "2026-08-16",
       "durationSeconds": 13356,
-      "views": 2193,
+      "views": 2194,
       "url": "https://vod.sooplive.com/player/204465169",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260816_2E8B33E6_296396467_1_r&column=2&t=1786867117"
@@ -585,7 +595,7 @@
       "title": "이노리 비키니 방셀 가챠✨ 진짜 가챠 컷씬이 나옵니다!!",
       "date": "2026-08-15",
       "durationSeconds": 20556,
-      "views": 3264,
+      "views": 3265,
       "url": "https://vod.sooplive.com/player/204380385",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260815_DF7BC15E_296371305_1_r&column=2&t=1786785601"
@@ -615,7 +625,7 @@
       "title": "💬IQ 테스트 (138 나옴) + 방송 자소서 쓰기",
       "date": "2026-08-11",
       "durationSeconds": 20319,
-      "views": 1792,
+      "views": 1795,
       "url": "https://vod.sooplive.com/player/204045041",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260811_63D44B90_296276491_1_r&column=2&t=1786595311"
@@ -855,7 +865,7 @@
       "title": "💬100문 100답 작성하기",
       "date": "2026-07-02",
       "durationSeconds": 27298,
-      "views": 1811,
+      "views": 1812,
       "url": "https://vod.sooplive.com/player/200270021",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260701_1A5D3CF5_295241255_1_r&column=2&t=1782975114"
@@ -975,7 +985,7 @@
       "title": "🍿사이버펑크 엣지러너 같이보기 폭풍오열 ㅠㅠ",
       "date": "2026-06-11",
       "durationSeconds": 25227,
-      "views": 2037,
+      "views": 2038,
       "url": "https://vod.sooplive.com/player/198313283",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260610_F2B18EBE_294706363_2_r"
@@ -995,7 +1005,7 @@
       "title": "💬개미털기 노래방...",
       "date": "2026-06-05",
       "durationSeconds": 19380,
-      "views": 2151,
+      "views": 2152,
       "url": "https://vod.sooplive.com/player/197829805",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260605_FF8A8806_294578677_1_r"
@@ -1005,7 +1015,7 @@
       "title": "💬본격 사죄방송 (애교+매도+미시+얀데레 월드컵)",
       "date": "2026-06-05",
       "durationSeconds": 8428,
-      "views": 1495,
+      "views": 1496,
       "url": "https://vod.sooplive.com/player/197749353",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260604_D2713690_294563975_1_r"
@@ -1555,7 +1565,7 @@
       "title": "화이트데이 기념 첫 방셀 룰렛!(혜자) + 뉴의상 공개 💟33/330💟",
       "date": "2026-03-14",
       "durationSeconds": 29880,
-      "views": 1582,
+      "views": 1583,
       "url": "https://vod.sooplive.com/player/189699945",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260314_B5005D8B_292379649_1_r&column=2&t=1774331057"
@@ -1575,7 +1585,7 @@
       "title": "시청자 퀴즈쇼 + 이노리 찐생일 공개",
       "date": "2026-03-11",
       "durationSeconds": 22123,
-      "views": 1016,
+      "views": 1017,
       "url": "https://vod.sooplive.com/player/189408453",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260311_BAD643DA_292299473_1_r&column=2&t=1774331125"
@@ -1605,7 +1615,7 @@
       "title": "소통데이 (드릴 말씀+야구가리+후열 노래방)",
       "date": "2026-03-06",
       "durationSeconds": 23426,
-      "views": 1268,
+      "views": 1270,
       "url": "https://vod.sooplive.com/player/188920097",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260306_2123010F_292163627_1_r&column=2&t=1773141279"
@@ -1615,7 +1625,7 @@
       "title": "*이 모바일 야방은 육두문자가 남발하여 구플로 전환되었습니다.",
       "date": "2026-03-05",
       "durationSeconds": 8179,
-      "views": 569,
+      "views": 570,
       "url": "https://vod.sooplive.com/player/188731983",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260304_866CD038_292121731_1_r&column=2&t=1773141531"
@@ -1685,7 +1695,7 @@
       "title": "2부)존댓말 라디오 2화 | 퇴근라디오",
       "date": "2026-02-25",
       "durationSeconds": 4662,
-      "views": 409,
+      "views": 410,
       "url": "https://vod.sooplive.com/player/187962333",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260225_303E943D_291916702_1_r&column=2&t=1774331249"
@@ -1735,7 +1745,7 @@
       "title": "운동룰렛과 수상한 업보 수행",
       "date": "2026-02-21",
       "durationSeconds": 15602,
-      "views": 796,
+      "views": 797,
       "url": "https://vod.sooplive.com/player/187571129",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260221_61300980_291804524_1_r&column=2&t=1771905686"
@@ -1795,7 +1805,7 @@
       "title": "셀프 건피(이노리 데뷔뱅 같이보기) + 숲 용어 알아보기",
       "date": "2026-02-12",
       "durationSeconds": 19924,
-      "views": 1293,
+      "views": 1294,
       "url": "https://vod.sooplive.com/player/186673899",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260212_202233BD_291561884_1_r&column=2&t=1771340222"
@@ -1805,7 +1815,7 @@
       "title": "방탈출 시뮬레이터 w.우앵두",
       "date": "2026-02-11",
       "durationSeconds": 18774,
-      "views": 1026,
+      "views": 1027,
       "url": "https://vod.sooplive.com/player/186540251",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260211_C4E81BB8_291528990_1_r&column=2&t=1771339641"
@@ -2005,7 +2015,7 @@
       "title": "시청자들 미소녀로 만들기 | 구독티콘 그리기",
       "date": "2026-01-13",
       "durationSeconds": 12903,
-      "views": 698,
+      "views": 699,
       "url": "https://vod.sooplive.com/player/183688893",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260113_369EFABF_290727078_1_r&column=2&t=1768306926"
@@ -2015,7 +2025,7 @@
       "title": "복귀 방송 | 여행 후기 + 잔잔 소통 그리고 의식의 흐름",
       "date": "2026-01-12",
       "durationSeconds": 23332,
-      "views": 1382,
+      "views": 1383,
       "url": "https://vod.sooplive.com/player/183590419",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260112_BF155298_290696336_1_r&column=2&t=1768383048"
@@ -2265,7 +2275,7 @@
       "title": "더 파이널스 4조 연습  w.이주인인간, 채은채인간, 티팃인간",
       "date": "2024-06-02",
       "durationSeconds": 11218,
-      "views": 124,
+      "views": 125,
       "url": "https://vod.sooplive.com/player/126487091",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20240602_66D8ED2B_270524796_1_r"
@@ -2285,7 +2295,7 @@
       "title": "찐찐찐찐막리방)왁타버스 아르마 대회 지하아이돌 이노리 시점✝️",
       "date": "2024-03-28",
       "durationSeconds": 9452,
-      "views": 516,
+      "views": 517,
       "url": "https://vod.sooplive.com/player/120262505",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20240327_9A13508B_260256568_2_r"
@@ -2325,7 +2335,7 @@
       "title": "왁타버스 아르마 마라톤 대회 이노리 시점  / 마왕답게1착전력질주메타",
       "date": "2024-03-27",
       "durationSeconds": 787,
-      "views": 72,
+      "views": 73,
       "url": "https://vod.sooplive.com/player/120231619",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20240327_EF584FC5_260237160_2_r"
@@ -2335,7 +2345,7 @@
       "title": "9시반)왁타버스 아르마 마라톤 이노리 시점 ✝️ / 마왕답게1착전력질주메타",
       "date": "2024-03-27",
       "durationSeconds": 1479,
-      "views": 84,
+      "views": 85,
       "url": "https://vod.sooplive.com/player/120229499",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20240327_0F4F47E9_260233442_1_r"
@@ -2345,7 +2355,7 @@
       "title": "왁타버스 배틀크러쉬 대회 9팀 [지존악당즈] 이노리 시점  w.쵸로키, 아쿠루 / 오마에라~ 다 쓸어버리겠당✝️",
       "date": "2024-03-25",
       "durationSeconds": 12536,
-      "views": 371,
+      "views": 372,
       "url": "https://vod.sooplive.com/player/119988829",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20240324_DBE66F35_259875864_3_r"
@@ -2355,15 +2365,15 @@
       "title": "왁타버스 배틀크러쉬 대회 9팀 [지존악당즈] 이노리 시점  w.쵸로키, 아쿠루 / 인간들 다 쓸어버리겠당✝️",
       "date": "2024-03-24",
       "durationSeconds": 8523,
-      "views": 269,
+      "views": 270,
       "url": "https://vod.sooplive.com/player/119963057",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20240324_02391E9F_259875864_2_r"
     }
   ],
-  "updatedAt": "2026-11-13T06:48:30.148Z",
+  "updatedAt": "2026-11-14T06:26:51.047Z",
   "source": "SOOP 공개 다시보기",
   "partial": false,
   "pagesFetched": 4,
-  "sourceTotal": 235
+  "sourceTotal": 236
 }
