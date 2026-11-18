@@ -1,11 +1,21 @@
 {
   "items": [
     {
+      "id": 212902331,
+      "title": "📞모뱅",
+      "date": "2026-11-17",
+      "durationSeconds": 4785,
+      "views": 886,
+      "url": "https://vod.sooplive.com/player/212902331",
+      "category": "다시보기",
+      "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261117_7A3EC809_298666641_1_r"
+    },
+    {
       "id": 212601087,
       "title": "(2부)점심핀볼 + 카페 + 김피탕먹방",
       "date": "2026-11-14",
       "durationSeconds": 8764,
-      "views": 1515,
+      "views": 1529,
       "url": "https://vod.sooplive.com/player/212601087",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261114_954B6210_298587333_1_r"
@@ -15,7 +25,7 @@
       "title": "(1부) 뉴배경 공개🪻소통!!",
       "date": "2026-11-14",
       "durationSeconds": 2175,
-      "views": 1188,
+      "views": 1191,
       "url": "https://vod.sooplive.com/player/212590539",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261114_0F7C2F43_298586485_1_r"
@@ -25,7 +35,7 @@
       "title": "시청자 퀴즈쇼 + 니케 올드테일즈 2부 (예열 마헤라 심함 미아내요 ㅠㅠ)",
       "date": "2026-11-14",
       "durationSeconds": 30485,
-      "views": 1938,
+      "views": 1944,
       "url": "https://vod.sooplive.com/player/212552903",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261113_DDB4C151_298563757_2_r"
@@ -35,7 +45,7 @@
       "title": "소통 카페 + 수능국어 맛만보기 + 림버스 발푸밤 가챠 맛만보기",
       "date": "2026-11-13",
       "durationSeconds": 15992,
-      "views": 1478,
+      "views": 1484,
       "url": "https://vod.sooplive.com/player/212463993",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261112_7FF4EBD2_298548097_2_r"
@@ -55,7 +65,7 @@
       "title": "소통카페 + 에이징커브 게임 + 니케 올드테일즈 1부까지",
       "date": "2026-11-08",
       "durationSeconds": 25898,
-      "views": 2397,
+      "views": 2400,
       "url": "https://vod.sooplive.com/player/212075999",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261108_9FBC25A6_298439301_2_r"
@@ -65,7 +75,7 @@
       "title": "💪 첫 풀트 링피트 룰렛",
       "date": "2026-11-07",
       "durationSeconds": 25225,
-      "views": 2384,
+      "views": 2385,
       "url": "https://vod.sooplive.com/player/211983049",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261107_BDA5203B_298414367_2_r"
@@ -75,7 +85,7 @@
       "title": "(2부) 림버스 6.5장 워특살",
       "date": "2026-11-07",
       "durationSeconds": 18592,
-      "views": 1718,
+      "views": 1721,
       "url": "https://vod.sooplive.com/player/211931977",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261106_5074E1BB_298402299_2_r"
@@ -85,7 +95,7 @@
       "title": "(1부) 소통 + 카페 + 80억분의 1+ 림버스 발푸밤 pv&워특살 앞부분",
       "date": "2026-11-06",
       "durationSeconds": 16199,
-      "views": 1750,
+      "views": 1751,
       "url": "https://vod.sooplive.com/player/211908909",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261106_7B432A45_298392543_2_r"
@@ -95,7 +105,7 @@
       "title": "모닝콜",
       "date": "2026-11-05",
       "durationSeconds": 6583,
-      "views": 1278,
+      "views": 1279,
       "url": "https://vod.sooplive.com/player/211780851",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261105_DCB66DC3_298360929_2_r"
@@ -125,7 +135,7 @@
       "title": "(2부) 림버스컴퍼니 6.5장 1편 [시간살인시간]",
       "date": "2026-10-31",
       "durationSeconds": 19056,
-      "views": 1728,
+      "views": 1729,
       "url": "https://vod.sooplive.com/player/211258755",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=211258755_1793607730_1_r&column=2&t=1793630933"
@@ -135,7 +145,7 @@
       "title": "(1부) 풀트 테스트 + 카페 + 아아아 게임",
       "date": "2026-10-30",
       "durationSeconds": 8074,
-      "views": 1536,
+      "views": 1539,
       "url": "https://vod.sooplive.com/player/211221761",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261030_BCF96D5B_298222483_1_r&column=2&t=1793630167"
@@ -175,7 +185,7 @@
       "title": "사펑2 같이보기 + 후열 노래깎기",
       "date": "2026-10-23",
       "durationSeconds": 24762,
-      "views": 1921,
+      "views": 1922,
       "url": "https://vod.sooplive.com/player/210622513",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261023_FD519823_298052871_1_r&column=2&t=1792913225"
@@ -185,7 +195,7 @@
       "title": "립모션 손 공개 + 최애캐 스코프 2편",
       "date": "2026-10-23",
       "durationSeconds": 27207,
-      "views": 1985,
+      "views": 1986,
       "url": "https://vod.sooplive.com/player/210540567",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261022_C8D071AD_298029211_1_r&column=2&t=1792913426"
@@ -205,7 +215,7 @@
       "title": "시청자 최애캐 스코프 1편 + 그냥서버 졸업",
       "date": "2026-10-17",
       "durationSeconds": 33405,
-      "views": 3228,
+      "views": 3232,
       "url": "https://vod.sooplive.com/player/210079829",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261017_12B167E9_297904591_1_r&column=2&t=1792240150"
@@ -255,7 +265,7 @@
       "title": "세계정신건강의날... WASD 대결합방 w.설홍,여우연,뿡치",
       "date": "2026-10-11",
       "durationSeconds": 23663,
-      "views": 3213,
+      "views": 3214,
       "url": "https://vod.sooplive.com/player/209470499",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261010_85A4E3F5_297737773_1_r&column=2&t=1792152634"
@@ -265,7 +275,7 @@
       "title": "역팬데이 + 9월 시청자어워드 + 후열 그냥서버, 노래방",
       "date": "2026-10-09",
       "durationSeconds": 27602,
-      "views": 4135,
+      "views": 4136,
       "url": "https://vod.sooplive.com/player/209351341",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20261009_2F34A429_297706079_1_r&column=2&t=1791603258"
@@ -355,7 +365,7 @@
       "title": "림버스 6장 하편 + 후열 노래방",
       "date": "2026-09-28",
       "durationSeconds": 33849,
-      "views": 3190,
+      "views": 3191,
       "url": "https://vod.sooplive.com/player/208282271",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260927_B04356D9_297417169_1_r&column=2&t=1790933390"
@@ -435,7 +445,7 @@
       "title": "오밀당 커머스 + 이프보드 + 림버스 5.5장 마무리",
       "date": "2026-09-12",
       "durationSeconds": 25531,
-      "views": 2003,
+      "views": 2004,
       "url": "https://vod.sooplive.com/player/206875995",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260911_CA675F05_297040801_1_r&column=2&t=1789184176"
@@ -515,7 +525,7 @@
       "title": "카페긴급점검 + 건담 수성의마녀 같이보기 5화~12화",
       "date": "2026-08-27",
       "durationSeconds": 27292,
-      "views": 2760,
+      "views": 2761,
       "url": "https://vod.sooplive.com/player/205412169",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260826_DA6739DC_296650941_1_r&column=2&t=1787994238"
@@ -1055,7 +1065,7 @@
       "title": "🎉뉴노리 공개 모캡 방송! 새로운 이몸을 맞이해줘✝️ (즐찾, 생방 이벤트)",
       "date": "2026-05-31",
       "durationSeconds": 7368,
-      "views": 2527,
+      "views": 2530,
       "url": "https://vod.sooplive.com/player/197312017",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260531_38805947_294445251_1_r&column=2&t=1782973312"
@@ -1225,7 +1235,7 @@
       "title": "림버스 컴퍼니 3.5장 + 만우절 1-2 스토리 + 후열 수감자들 첫인상, 현인상 림가리",
       "date": "2026-05-01",
       "durationSeconds": 20200,
-      "views": 940,
+      "views": 941,
       "url": "https://vod.sooplive.com/player/194421873",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260501_F780FA25_293663147_2_r"
@@ -1315,7 +1325,7 @@
       "title": "[노방종] 니케 스토리를 봐야 끝나는 노방종 - 1일차",
       "date": "2026-04-18",
       "durationSeconds": 72173,
-      "views": 2126,
+      "views": 2127,
       "url": "https://vod.sooplive.com/player/193108915",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260417_09C7198F_293292699_4_r"
@@ -1415,7 +1425,7 @@
       "title": "이노리 X 뿡치 만우절 합방 [가능충 케이크] | 가능의 끝을 보여드립니다 ^ ^",
       "date": "2026-04-01",
       "durationSeconds": 14883,
-      "views": 1211,
+      "views": 1218,
       "url": "https://vod.sooplive.com/player/191455183",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260401_8B691537_292868965_1_r&column=2&t=1775613374"
@@ -1965,7 +1975,7 @@
       "title": "명일방주: 엔드필드 (가챠O) + 초 카구야 공주 같이보기",
       "date": "2026-01-24",
       "durationSeconds": 30684,
-      "views": 1167,
+      "views": 1168,
       "url": "https://vod.sooplive.com/player/184695409",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260123_22BC82B6_291003648_1_r&column=2&t=1769609984"
@@ -1975,7 +1985,7 @@
       "title": "뿡치 에겐녀 컨설팅 합방 + 짧 보카로 노래방",
       "date": "2026-01-22",
       "durationSeconds": 18491,
-      "views": 997,
+      "views": 998,
       "url": "https://vod.sooplive.com/player/184569971",
       "category": "다시보기",
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20260122_613EE056_290974690_1_r&column=2&t=1769609636"
@@ -2391,9 +2401,9 @@
       "thumbnailUrl": "https://videoimg.sooplive.com/php/SnapshotLoad.php?rowKey=20240324_02391E9F_259875864_2_r"
     }
   ],
-  "updatedAt": "2026-11-17T07:57:15.695Z",
+  "updatedAt": "2026-11-18T07:31:48.587Z",
   "source": "SOOP 공개 다시보기",
   "partial": false,
   "pagesFetched": 4,
-  "sourceTotal": 238
+  "sourceTotal": 239
 }
