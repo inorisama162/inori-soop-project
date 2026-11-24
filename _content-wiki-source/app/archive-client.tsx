@@ -8,6 +8,7 @@ import { FILTER_LABELS, countTags, isFilterId, matchesFilter, matchesSearch, typ
 import { GAME_RELATED_TAGS, curateTags, isVisibleTag, normalizeSearch, tagCloudSearchText, tagLabel } from "@/lib/tag-utils";
 import type { VodItem } from "@/lib/site-config";
 import { recommendedVods, recommendationSummary, summaryBasis } from "@/lib/recommendations";
+import initialVods from "../public/vods.json";
 
 type Status = "loading" | "ready" | "partial" | "fallback";
 type StoryKind = StoryEntry["kind"];
@@ -61,6 +62,7 @@ function VodCard({ item, featured = false, onTag, selectedTags, story, summaryOp
   onSummaryToggle?: (open: boolean) => void;
 }) {
   const [imageFailed, setImageFailed] = useState(false);
+  useEffect(() => { setImageFailed(false); }, [item.thumbnailUrl]);
   const [expandedTags, setExpandedTags] = useState(false);
   const duration = formatDuration(item.durationSeconds);
   const displayTags = item.tags.filter(isVisibleTag);
@@ -155,7 +157,7 @@ function RecommendationCarousel({ items, onTag, selectedTags }: { items: Archive
 }
 
 export default function ArchiveClient({ vodEndpoint = "/api/vods" }: { vodEndpoint?: string }) {
-  const [liveItems, setLiveItems] = useState<VodItem[]>([]);
+  const [liveItems, setLiveItems] = useState<VodItem[]>(initialVods.items);
   const [status, setStatus] = useState<Status>("loading");
   const [query, setQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<FilterId>("all");
@@ -194,7 +196,7 @@ export default function ArchiveClient({ vodEndpoint = "/api/vods" }: { vodEndpoi
 
   useEffect(() => {
     const controller = new AbortController();
-    fetch(vodEndpoint, { signal: controller.signal })
+    fetch(vodEndpoint, { signal: controller.signal, cache: "no-store" })
       .then((response) => { if (!response.ok) throw new Error("목록을 불러오지 못했습니다."); return response.json(); })
       .then((payload: { items?: VodItem[]; updatedAt?: string | null; unavailable?: boolean; partial?: boolean }) => {
         if (payload.unavailable || !Array.isArray(payload.items)) { setStatus("fallback"); return; }

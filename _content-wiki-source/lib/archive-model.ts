@@ -1,6 +1,7 @@
 import { archiveItems, type ArchiveItem } from "./archive-data";
 import { FILTER_LABELS } from "./archive-query";
 import { canonicalizeTags, curateTags, inferGames, inferTags } from "./tag-utils";
+import { inferStories, storyGroups } from "./story-classification";
 
 export { archiveItems } from "./archive-data";
 export type { ArchiveItem, StoryEntry } from "./archive-data";
@@ -24,9 +25,12 @@ export function normalizeItem(item: IncomingItem): ArchiveItem {
   };
 
   const title = item.broadcastTitle ?? item.title;
+  const stories = item.date < SOLO_START ? [] : item.stories ?? inferStories(title);
   const games = canonicalizeTags([...(item.games ?? []), ...inferGames(title)]);
   const groups = new Set((item.groups ?? []).map((group) => group === "기타 스토리 게임" ? "기타 서브컬쳐" : group).filter((group) => allowedGroups.has(group)));
-  const searchTags = canonicalizeTags([...(item.searchTags ?? item.tags ?? []), ...games, ...inferTags(title)]);
+  storyGroups(stories).forEach((group) => groups.add(group));
+  const searchTags = canonicalizeTags([...(item.searchTags ?? item.tags ?? []), ...games, ...inferTags(title),
+    ...(stories.some(({ kind }) => kind === "main" || kind === "event") ? ["스토리"] : [])]);
   if (groups.has("스코프 시리즈")) groups.add("모든 자체 컨텐츠");
   return {
     ...item,
@@ -38,6 +42,6 @@ export function normalizeItem(item: IncomingItem): ArchiveItem {
     searchTags,
     games,
     groups: item.date < SOLO_START ? [] : [...groups],
-    stories: item.date < SOLO_START ? [] : item.stories ?? [],
+    stories,
   };
 }

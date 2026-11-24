@@ -163,9 +163,66 @@ test('compatibility normalization uses shared tags and does not overwrite review
   assert.deepEqual(normalizeItem(initialReview.find(item => item.id === 210079829)), byId.get(210079829));
   const fresh = normalizeItem({ id: 1, date: '2026-11-11', title: '명조 스토리 + 니케 가챠' });
   assert.ok(fresh.tags.includes('명조') && fresh.tags.includes('니케') && fresh.tags.includes('가챠'));
-  assert.deepEqual(fresh.groups, []);
-  assert.deepEqual(fresh.stories, []);
+  assert.deepEqual(fresh.groups, ['니케']);
+  assert.equal(fresh.stories[0].game, 'nikke');
+  assert.equal(fresh.stories[0].kind, 'other');
   assert.ok(!inferTags('소통 그리고 의식의 흐름 방송').includes('그림'));
   assert.ok(!byId.get(186051183).tags.includes('그림'));
   assert.ok(!byId.get(183590419).tags.includes('그림'));
+});
+
+const snapshot = JSON.parse(readFileSync(new URL('../public/vods.json', import.meta.url), 'utf8'));
+const current = new Map(snapshot.items.map(item => [item.id, normalizeItem(item)]));
+const fresh = title => normalizeItem({ id: 1, date: '2026-11-24', title });
+
+test('recent Limbus chapter 7 follows Warp and retains its part and updated thumbnail', () => {
+  const item = current.get(213365057);
+  assert.ok(matchesFilter(item, 'limbus'));
+  assert.equal(item.stories[0].key, 'chapter-7');
+  assert.equal(item.stories[0].kind, 'main');
+  assert.equal(item.stories[0].part, '상~중편');
+  const warp = archiveItems.find(item => item.id === 211931977).stories[0];
+  assert.ok(item.stories[0].order > warp.order);
+  assert.ok(item.tags.includes('스토리'));
+  assert.equal(item.thumbnailUrl, snapshot.items.find(vod => vod.id === item.id).thumbnailUrl);
+});
+
+test('recent Nikke chapter 31 and OLD TALES part 2 enter their respective timelines', () => {
+  const main = current.get(213093969);
+  const event = current.get(212552903);
+  assert.ok(matchesFilter(main, 'nikke') && matchesFilter(event, 'nikke'));
+  assert.equal(main.stories[0].key, 'chapter-31');
+  assert.equal(main.stories[0].kind, 'main');
+  assert.ok(main.stories[0].order > archiveItems.find(item => item.id === 211177973).stories[0].order);
+  assert.equal(event.stories[0].kind, 'event');
+  assert.equal(event.stories[0].key, current.get(212075999).stories[0].key);
+  assert.equal(event.stories[0].part, '2부');
+});
+
+test('gacha and previews stay separate from story broadcasts', () => {
+  assert.equal(current.get(212463993).stories[0].kind, 'other');
+  assert.ok(matchesFilter(current.get(212463993), 'limbus'));
+  assert.equal(fresh('림버스 7장 PV 같이보기').stories[0].kind, 'other');
+  assert.equal(fresh('명조 3장 + 니케 가챠').stories[0].kind, 'other');
+  assert.equal(fresh('니케 가챠 + 명조 3장').stories[0].kind, 'other');
+  assert.equal(fresh('림버스 발푸밤 + 로보토미 3일차').stories[0].kind, 'other');
+});
+
+test('new chapter ranges, continuations and unknown broadcasts remain discoverable', () => {
+  assert.equal(fresh('니케 가챠 + 32~33지').stories[0].key, 'chapter-32-33');
+  assert.equal(fresh('니케 공식방송 + 31지').stories[0].key, 'chapter-31');
+  assert.equal(fresh('림버스컴퍼니 7장 하편').stories[0].key, 'chapter-7');
+  assert.equal(fresh('니케 스토리 노방종').stories[0].kind, 'main');
+  assert.equal(fresh('니케 입문').stories[0].kind, 'pending');
+  assert.equal(fresh('림버스 6.5장').stories[0].kind, 'pending');
+  assert.deepEqual(fresh('소통 카페').stories, []);
+  assert.deepEqual(normalizeItem({ id: 1, date: '2025-01-01', title: '니케 31지' }).stories, []);
+});
+
+test('SOOP thumbnail edits replace archived images while manual story classifications survive', () => {
+  const original = archiveItems.find(item => item.id === 211931977);
+  const updated = normalizeItem({ ...original, thumbnailUrl: 'https://videoimg.sooplive.com/new-thumbnail.jpg' });
+  assert.equal(updated.thumbnailUrl, 'https://videoimg.sooplive.com/new-thumbnail.jpg');
+  assert.deepEqual(updated.stories, original.stories);
+  assert.deepEqual(updated.groups, original.groups);
 });
