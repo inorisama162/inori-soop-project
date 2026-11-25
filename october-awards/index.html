@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- release: 2026.11.21-october-v1.1 -->
+<!-- release: 2026.11.25-october-v1.2 -->
 <html lang="ko">
 <head>
   <meta charset="utf-8">
@@ -142,7 +142,9 @@
     .timeline-row{display:grid;grid-template-columns:clamp(42px,4vw,64px) clamp(83px,7vw,112px) 1fr;align-items:center;gap:clamp(8px,.85vw,14px);min-height:clamp(42px,4.3vw,69px);padding:clamp(7px,.7vw,11px) clamp(10px,1vw,16px)}.timeline-row+.timeline-row{border-top:1px solid rgba(226,229,255,.1)}
     .timeline-row small{color:#93a2d5;font-size:clamp(8px,.62vw,11px)}.timeline-row strong{color:#eef0ff;font:clamp(11px,.9vw,15px) Georgia,serif}.timeline-row span{color:var(--muted);font-size:clamp(9px,.7vw,12px);line-height:1.35}
     .settlement-slide .exchange-note{text-align:left;line-height:1.45}
-    .sparkle-layer{position:fixed;z-index:9999;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+    .sparkle-switch{margin:0 8px 0 auto;white-space:nowrap;flex:none;padding:0 9px;width:auto;font-size:12px;color:var(--muted)}
+    .hint:not([hidden])+.sparkle-switch{margin-left:0}
+    .cursor-glint{position:fixed;z-index:9999;pointer-events:none;user-select:none;color:#e4deff;font:14px/1 Georgia,serif}
     .controls{gap:14px}.progress{flex:1;min-width:0}.meta{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:6px}.meta span{color:var(--muted);font-size:11px}.meta b{font:13px Georgia,serif}.meta i{margin:0 5px;color:#6f7ba5;font-style:normal}.track{height:1px;overflow:hidden;background:rgba(225,228,255,.16)}.track i{display:block;height:100%;background:#dedfff;transition:width .25s}
     .person-line{display:flex;align-items:center;gap:7px;min-width:0}.person-line .nickname-mask{flex:1}
     .trend{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:clamp(42px,3.7vw,60px);padding:4px 6px;border:1px solid rgba(218,222,255,.18);border-radius:999px;font:700 clamp(8px,.58vw,10px) Georgia,serif;letter-spacing:.03em;white-space:nowrap}
@@ -189,6 +191,7 @@
     <nav class="rail top" aria-label="발표 진행">
       <div class="brand"><span>INORI</span><i></i><b>MONTHLY AWARDS</b></div>
       <div class="hint">EDGE CLICK · ← → · SPACE</div>
+      <button type="button" class="icon-btn sparkle-switch" id="sparkle-switch" aria-label="마우스 반짝이" aria-pressed="true">반짝이 켜짐</button>
       <button class="icon-btn" id="full" title="전체화면 (F)" aria-label="전체화면">⛶</button>
     </nav>
     <div class="stage">
@@ -204,7 +207,6 @@
       <button class="icon-btn" id="next" aria-label="다음 슬라이드">→</button>
     </footer>
   </main>
-  <canvas class="sparkle-layer" id="sparkles" aria-hidden="true"></canvas>
   <script>
     const labels=["표지","오늘의 시상식","참여시간 별별랭킹","채팅 별별랭킹","이달의 편집왕","이달의 클립왕","이달의 클립","이달의 팬아터","마무리","포인트 정산"];
     const title=(eye,name,reward="")=>'<header class="title"><div><p class="eyebrow">'+eye+'</p><h2>'+name+'</h2></div>'+(reward?'<div class="reward"><small>REWARD</small><strong>'+reward+'</strong></div>':'')+'</header>';
@@ -249,31 +251,63 @@
     });
     addEventListener("keydown",e=>{if(e.target.closest&&e.target.closest("button,a"))return;if(["ArrowRight"," ","Enter","PageDown"].includes(e.key)){e.preventDefault();next()}if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){e.preventDefault();prev()}if(e.key==="Home")go(0);if(e.key==="End")go(slides.length-1);if(e.key.toLowerCase()==="f")document.documentElement.requestFullscreen?.()});
     addEventListener("touchstart",e=>touchX=e.touches[0]?.clientX,{passive:true});addEventListener("touchend",e=>{if(touchX===null)return;const d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>50)d<0?next():prev();touchX=null},{passive:true});
-    const sparkleCanvas=document.getElementById("sparkles"),sparkleCtx=sparkleCanvas.getContext("2d"),sparkleColors=["#ffffff","#ddd9ff","#b9c8ff","#fff2b8"];
-    let sparkleRatio=1,sparkleFrame=0,lastSparkle=0,sparkleParticles=[];
-    const resizeSparkles=()=>{sparkleRatio=Math.min(devicePixelRatio||1,1.5);sparkleCanvas.width=Math.round(innerWidth*sparkleRatio);sparkleCanvas.height=Math.round(innerHeight*sparkleRatio);sparkleCtx.setTransform(sparkleRatio,0,0,sparkleRatio,0,0)};
-    const drawSparkles=()=>{
-      sparkleCtx.clearRect(0,0,innerWidth,innerHeight);
-      sparkleParticles=sparkleParticles.filter(p=>{
-        p.x+=p.vx;p.y+=p.vy;p.vy+=p.gravity;p.rotation+=p.spin;p.life-=p.decay;
-        if(p.life<=0)return false;
-        sparkleCtx.save();sparkleCtx.translate(p.x,p.y);sparkleCtx.rotate(p.rotation);sparkleCtx.globalAlpha=Math.min(1,p.life*1.9);sparkleCtx.globalCompositeOperation="lighter";sparkleCtx.fillStyle=p.color;sparkleCtx.shadowColor=p.color;sparkleCtx.shadowBlur=14;sparkleCtx.beginPath();
-        for(let point=0;point<8;point++){const radius=point%2?p.size*.22:p.size,angle=-Math.PI/2+point*Math.PI/4,x=Math.cos(angle)*radius,y=Math.sin(angle)*radius;point?sparkleCtx.lineTo(x,y):sparkleCtx.moveTo(x,y)}
-        sparkleCtx.closePath();sparkleCtx.fill();sparkleCtx.restore();
-        return true;
+    // Four reusable glyphs; only the glyph transform and opacity are animated.
+    (() => {
+      const toggle = document.getElementById("sparkle-switch");
+      const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+      const key = "inori:october-awards:sparkles";
+      let choice = null, last = -Infinity, lastX = NaN, lastY = NaN;
+      try { choice = localStorage.getItem(key); } catch {}
+      const pool = Array.from({length: 4}, () => {
+        const el = document.createElement("span");
+        el.className = "cursor-glint"; el.textContent = "✦";
+        el.hidden = true; el.setAttribute("aria-hidden", "true");
+        document.body.append(el);
+        return {el, animation: null};
       });
-      sparkleFrame=sparkleParticles.length?requestAnimationFrame(drawSparkles):0;
-    };
-    const sparkleAt=(x,y,count=1)=>{
-      for(let i=0;i<count;i++){
-        sparkleParticles.push({x:x+(Math.random()-.5)*13,y:y+(Math.random()-.5)*9,vx:(Math.random()-.5)*1.6,vy:.75+Math.random()*1.25,gravity:.035+Math.random()*.025,life:1,decay:.013+Math.random()*.007,size:5+Math.random()*6,rotation:Math.random()*Math.PI,spin:(Math.random()-.5)*.1,color:sparkleColors[Math.floor(Math.random()*sparkleColors.length)]});
+      const enabled = () => choice === "on" || (choice !== "off" && !reduced.matches);
+      function emit(e) {
+        if (e.pointerType !== "mouse" || e.target === toggle) return;
+        const now = performance.now();
+        if (now - last < 110) return;
+        if (e.type === "pointermove" && Math.abs(e.clientX-lastX) + Math.abs(e.clientY-lastY) < 12) return;
+        const slot = pool.find(p => !p.animation);
+        if (!slot) return;
+        last = now; lastX = e.clientX; lastY = e.clientY;
+        const el = slot.el, press = e.type === "pointerdown";
+        el.style.left = (e.clientX - 5) + "px";
+        el.style.top = (e.clientY - 6) + "px";
+        el.hidden = false;
+        const animation = slot.animation = el.animate([
+          {opacity: .88, transform: press ? "scale(1.2)" : "scale(.85)"},
+          {opacity: 0, transform: "translate(3px, 10px) scale(.4)"}
+        ], {duration: 330, easing: "ease-out"});
+        animation.onfinish = () => {
+          if (slot.animation === animation) { el.hidden = true; slot.animation = null; }
+        };
       }
-      if(sparkleParticles.length>100)sparkleParticles.splice(0,sparkleParticles.length-100);
-      if(!sparkleFrame)sparkleFrame=requestAnimationFrame(drawSparkles);
-    };
-    resizeSparkles();addEventListener("resize",resizeSparkles,{passive:true});
-    addEventListener("mousemove",e=>{const now=performance.now();if(now-lastSparkle<22)return;lastSparkle=now;sparkleAt(e.clientX,e.clientY,Math.random()>.55?3:2)},{passive:true});
-    addEventListener("pointerdown",e=>sparkleAt(e.clientX,e.clientY,12),{passive:true});
+      function sync() {
+        const on = enabled();
+        toggle.textContent = on ? "반짝이 켜짐" : "반짝이 꺼짐";
+        toggle.setAttribute("aria-pressed", String(on));
+        for (const event of ["pointermove", "pointerdown"]) {
+          window.removeEventListener(event, emit);
+          if (on && !document.hidden) window.addEventListener(event, emit, {passive:true});
+        }
+        if (!on || document.hidden) {
+          for (const slot of pool) { slot.animation?.cancel(); slot.animation = null; slot.el.hidden = true; }
+          last = -Infinity; lastX = lastY = NaN;
+        }
+      }
+      toggle.addEventListener("click", () => {
+        choice = enabled() ? "off" : "on";
+        try { localStorage.setItem(key, choice); } catch {}
+        sync();
+      });
+      document.addEventListener("visibilitychange", sync);
+      reduced.addEventListener("change", sync);
+      sync();
+    })();
     render();
   </script>
 </body>
