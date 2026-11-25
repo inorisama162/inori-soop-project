@@ -10,6 +10,9 @@ export { normalizeSearch } from "./tag-utils";
 export const SOLO_START = "2025-12-19";
 
 const reviewedById = new Map(archiveItems.map((item) => [item.id, item]));
+const additionalTagsById: Record<number, string[]> = {
+  213507541: ["모바일 방송"],
+};
 const allowedGroups = new Set(Object.entries(FILTER_LABELS)
   .filter(([filter]) => filter !== "all" && filter !== "recommended")
   .map(([, label]) => label as string));
@@ -29,7 +32,7 @@ export function normalizeItem(item: IncomingItem): ArchiveItem {
   const games = canonicalizeTags([...(item.games ?? []), ...inferGames(title)]);
   const groups = new Set((item.groups ?? []).map((group) => group === "기타 스토리 게임" ? "기타 서브컬쳐" : group).filter((group) => allowedGroups.has(group)));
   storyGroups(stories).forEach((group) => groups.add(group));
-  const searchTags = canonicalizeTags([...(item.searchTags ?? item.tags ?? []), ...games, ...inferTags(title),
+  const searchTags = canonicalizeTags([...(item.searchTags ?? item.tags ?? []), ...(additionalTagsById[item.id] ?? []), ...games, ...inferTags(title),
     ...(stories.some(({ kind }) => kind === "main" || kind === "event") ? ["스토리"] : [])]);
   if (groups.has("스코프 시리즈")) groups.add("모든 자체 컨텐츠");
   return {
